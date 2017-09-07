@@ -24,7 +24,7 @@ env:
 
 after_success:
   - "openssl aes-256-cbc -k $DEPLOY_KEY -in id_tripbook_deploy_rsa_enc_travis -d -a -out id_tripbook_deploy_rsa"
-  - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
+  - "[[ $TRAVIS_BRANCH = 'master' ]] && ./deploy.sh"
 
 branches:
   only:
