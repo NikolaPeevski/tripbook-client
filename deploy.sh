@@ -4,6 +4,7 @@ rm -rf dist
 npm run build prod
 # ZIP the dist folder
 tar czf dist.tar.gz dist/*
+# Update permissions for the private key
 # Copy the zipped file to the server
 scp -i config/id_tripbook_deploy_rsa dist.tar.gz deploy@188.166.94.245:~
 # scp -i ~/.ssh/id_tripbook_deploy_rsa dist.tar.gz deploy@188.166.94.245:~
