@@ -2,7 +2,7 @@
 rm -rf dist
 
 # Create a prod build
-npm build --prod
+ng build --env=prod
 
 # ZIP the dist folder
 tar czf dist.tar.gz dist/*
@@ -36,4 +36,3 @@ ssh -i config/id_tripbook_deploy_rsa deploy@188.166.94.245 << 'ENDSSH'
 
 # End the connection
 ENDSSH
-
