@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
-import { httpWrapperService } from './shared/httpWrapper.service';
+// import { httpWrapperService } from './shared/httpWrapper.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { httpWrapperService } from './shared/httpWrapper.service';
     HttpModule
   ],
   providers: [
-    httpWrapperService,
+    // httpWrapperService,
   ],
   bootstrap: [AppComponent]
 })

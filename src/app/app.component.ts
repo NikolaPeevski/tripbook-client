@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 
-import { httpWrapperService } from './shared/httpWrapper.service';
+// import { httpWrapperService } from './shared/httpWrapper.service';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,13 @@ import { httpWrapperService } from './shared/httpWrapper.service';
 export class AppComponent {
   title = 'app';
 
-  constructor(private _httpWrapperService: httpWrapperService){}
+  constructor(
+    // private _httpWrapperService: httpWrapperService
+  ){}
 
-  backEndHelloWorld():void {
-    this._httpWrapperService.get('helloworld')
-      .then(response => alert(response))
-      .catch(err => console.error(err));
-  }
+  // backEndHelloWorld():void {
+  //   this._httpWrapperService.get('helloworld')
+  //     .then(response => alert(response))
+  //     .catch(err => console.error(err));
+  // }
 }
