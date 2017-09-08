@@ -1,31 +1,23 @@
 dist: trusty
 sudo: false
-
 language: node_js
 node_js:
-  - "8"
-
+- '8'
 cache:
   directories:
-     - ./node_modules
-
+  - "./node_modules"
 install:
-  - npm install
-
+- npm install
 script:
-  # Use Chromium instead of Chrome.
-  - export CHROME_BIN=chromium-browser
-  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
-  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
-
+- export CHROME_BIN=chromium-browser
+- xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+- xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
 env:
   global:
-  - secure: dDCeWbK7eJheGFye9hIs9OwCf+zn8m9oj7yeNeJekdUAk0vjOVasQSpAnSB+yp9ff5vGyW8GO3TPVlR/XLBOGQB9Y8BheE/yuGiZPm292X+4MNbPYIfA0qAUjEnvhGt3kKsHBw/MfPwTceuZ1Q/kFLyoomX2HUSY8Q1gBImdsye9YH+x/Le+11P1i2yYj092ZBx8JSfFrP3e0KSY6zXMwR2uQk6sbDKP9t59KL/qUFV8e8jZ2BYtccyudIzLqgpSSH6IqpeOkBm/aidBEadgwuYfOkLGqjoDsINQNNj7ea80Mc55Y8upD5ag3XddDcdpDwLqU9l4nBkS0Eqy7Dk9wz8uzFkiKeFgzLfQjrQzfdxPxvBSxbhJd2+6bO5RdEgMGfNBOuK6FEjsqcBzduYmVQLzQAWNQ6je3w0RzsM7EMhzfPrpZCSSt6NCZygfLas0L8/pgCGTDTNmb79A72ZFKXPjhkmM9wKM2CFujiIxJFr+DDM0iIoHdUqe35gFakSK27BhfO+10+8zmZ9j1W+0xYpnjowsF6FMyCKTuTvDk3atr2YZzLiXK7pF2svr8fnS4/EjtqsqkzECoCnd9LK1wEhQ1UyaV0KnJvCe92qNC8R2zjE2X5iXOV+oGVihhvJYBYuh5WK/p4cb2JTxGhUDdzjKV8B9P0/uT1g8Zolph/U=
-
+  - secure: m/svDH2LwLmmza2wrrvY+9l06I90+3K70OK6yflfsU4gGA3ucyopFTAfVCKUc1i859Q9lvBkhI7pmWr6jFop7uqCtO2GjOxWLsrLO3/bjPlUaaRoe+CU+85hbrkP+ZywOj5sklVJ5nqaa5hRtW+yQPMJhRjz/HCC2C8HpdrnTQJSjiZFJermv+tbT1V/OvuWs+gn+zC9SMUh38U/CzmSbD6s+GUfxQ0m+JDAMkbIZ26Ll6QNNP5HJNNuI6Re7jX6rDct1W2rTr1FTvWImH58yvCtUSSDod/5L8neLn8lIX/7rQ/muzYd8tYfzhn1Rtzlij6ywwvBoILHLT99FIWJIhtnhZKPuT6I1k+U9G5DmjHvGOt+hH2qEECKaR52K5OjYmmp1whWJEDmarfaIaSFRczRuqqh0fCihDXOYL7oVs5fM3K42MZkgCDwOrge8XAEopEq2w/j6p9J+y+MCbqO23hSXWVR113VlL0T4y9c3XXfnGjmvRp8cs4vg0gbeDectZedm0/DfXyVZA7CByNqu4BTa4PDGf2j8tQuPvtdmQl7K6/SXgOYBWJK7qA5VwVmeMxZzGk9zz3k6VajzTd9iXNnCLfL5nUAPLnCv2xHWhiC3rVZDFQ4LfRgmE6laEl2wZpDnpfFJVHvxULlDgR97UpqwBhwC4oO4r/KDUs0wzk=
 after_success:
-  - "openssl aes-256-cbc -k $DEPLOY_KEY -in ./id_tripbook_deploy_rsa_enc_travis -d -a -out ./id_tripbook_deploy_rsa"
-  - "[[ $TRAVIS_BRANCH = 'master' ]] && ./deploy.sh"
-
+- "openssl aes-256-cbc -k $DEPLOY_KEY -in config/id_tripbook_deploy_rsa_enc_travis -d -a -out config/id_tripbook_deploy_rsa"
+- "[[ $TRAVIS_BRANCH = 'master' ]] && ./deploy.sh"
 branches:
   only:
-    - master
+  - master

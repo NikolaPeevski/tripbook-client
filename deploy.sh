@@ -5,12 +5,12 @@ npm run build prod
 # ZIP the dist folder
 tar czf dist.tar.gz dist/*
 # Copy the zipped file to the server
-scp -i id_tripbook_deploy_rsa dist.tar.gz deploy@188.166.94.245:~
+scp -i config/id_tripbook_deploy_rsa dist.tar.gz deploy@188.166.94.245:~
 # scp -i ~/.ssh/id_tripbook_deploy_rsa dist.tar.gz deploy@188.166.94.245:~
 # Remove the zipped folder locally
 rm dist.tar.gz
 # Connect to the server
-ssh -i id_tripbook_deploy_rsa deploy@188.166.94.245 << 'ENDSSH'
+ssh -i config/id_tripbook_deploy_rsa deploy@188.166.94.245 << 'ENDSSH'
 # ssh -i ~/.ssh/id_tripbook_deploy_rsa deploy@188.166.94.245 << 'ENDSSH'
 # Delete the previous version
 rm -rf tripbook-client
