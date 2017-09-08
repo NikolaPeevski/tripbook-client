@@ -45,3 +45,8 @@ Vagrantfile
 Gemfile
 Gemfile.lock
 yarn.lock
+
+# Ignoring the keys!
+config/id_tripbook_deploy_rsa
+npm-debug.log.1714261518
+npm-debug.log.3956394951
