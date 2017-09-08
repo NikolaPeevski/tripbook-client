@@ -44,3 +44,4 @@ package-lock.json
 Vagrantfile
 Gemfile
 Gemfile.lock
+yarn.lock

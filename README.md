@@ -1,4 +1,5 @@
-# Tripbook
+# Tripbook 
+[![Build Status](https://travis-ci.com/WillyWaser/tripbook-client.svg?token=2t6mwgyu3pSV3TnSKXGb&branch=master)](https://travis-ci.com/WillyWaser/tripbook-client)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
 
