@@ -2,7 +2,7 @@
 rm -rf dist
 
 # Create a prod build
-npm run build prod
+npm build --prod
 
 # ZIP the dist folder
 tar czf dist.tar.gz dist/*
