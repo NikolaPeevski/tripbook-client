@@ -2,7 +2,7 @@
 rm -rf dist
 
 # Create a prod build
-ng build --env=prod
+ng build --env=prod --no-sourcemap
 
 # ZIP the dist folder
 tar czf dist.tar.gz dist/*
