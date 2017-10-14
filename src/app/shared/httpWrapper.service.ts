@@ -1,5 +1,7 @@
 import * as Promise from 'bluebird';
 
+import { Angular2TokenService } from 'angular2-token';
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
@@ -13,27 +15,30 @@ import { Constants } from './Constants';
 @Injectable()
 export class httpWrapperService {
 
-  constructor(private _Http : Http){}
+  constructor(private _Angular2TokenService: Angular2TokenService){}
 
-  get(url:string, additionalHeaders?: any, toJSON: boolean = true, isAPI: boolean = false) : Promise<any> {
-    return new Promise((resolve, reject) =>{
-        // let options = {
-        //   'Content-Type' : 'application/json',
-        //   'Accept' : 'application/json'
-        // };
-        // console.log(options);
-        // let b = {
-        //   headers: new Headers(options)
-        // };
-        // console.log(b);
-        // let c = new RequestOptions(b);
+  /**
+ * True of the response content type is JSON.
+ */
+  private isJson(value: Response): boolean {
+      return /\bapplication\/json\b/.test(value.headers.get('Content-Type'));
+  }
 
-        (<any>this._Http.get(`${isAPI ? Constants.APIURL : ''}${url}`))
+  /**
+   * Wrapped get method with necessary tokens
+   * @param  {string}       url               Necessary path
+   * @param  {any}          additionalHeaders Future feature
+   * @param  {boolean   =                 true}        isAPI  Is internal or external request
+   * @return {Promise<any>}                   Json type response in the form of a promise
+   */
+  get(url:string, additionalHeaders: any = {}, isAPI: boolean = true) : Promise<any> {
+    return new Promise((resolve, reject) => {
+        (<any>this._Angular2TokenService.get(`${isAPI ? Constants.APIURL : ''}/${url}`, additionalHeaders))
           .map( response => response)
             .toPromise()
-              .then(data => resolve(data))
+              .then(data => resolve(data.json())) //TODO: this.isJson(data) ? data : add this when Content-Type is fixed
               .catch(err => reject(err));
-              //Should Implement error service.
+              //TODO: Implement error service.
     });
   }
 
