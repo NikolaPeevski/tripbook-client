@@ -33,7 +33,7 @@ export class httpWrapperService {
    */
   get(url:string, additionalHeaders: any = {}, isAPI: boolean = true) : Promise<any> {
     return new Promise((resolve, reject) => {
-        (<any>this._Angular2TokenService.get(`${isAPI ? Constants.APIURL : ''}/${url}`, additionalHeaders))
+        (<any>this._Angular2TokenService.get(`${url}`, additionalHeaders))
           .map( response => response)
             .toPromise()
               .then(data => resolve(data.json())) //TODO: this.isJson(data) ? data : add this when Content-Type is fixed

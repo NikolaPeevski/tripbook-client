@@ -1,0 +1,80 @@
+<div id="login">
+  <button class="switchState" mat-raised-button color="accent" (click)="switchState()">Sign {{viewState ? 'in' : 'up'}}</button>
+
+  <div class="signUp" *ngIf="viewState" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-title>Sign up</mat-card-title>
+        <mat-card-content >
+          <form class="example-form" fxLayout="column">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="First name" required [formControl]="firstNameFormControl">
+              <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                This field is required
+              </mat-error>
+              <mat-error *ngIf="firstNameFormControl.hasError('pattern')">
+                Please enter a valid first name
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Last Name" required [formControl]="lastNameFormControl">
+              <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                This field is required
+              </mat-error>
+              <mat-error *ngIf="lastNameFormControl.hasError('pattern')">
+                Please enter a valid last name
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Email" [formControl]="emailFormControl" required>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                This field is required
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('pattern')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input type="password" matInput placeholder="Password" required [formControl]="passwordFormControl">
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                This field is required
+              </mat-error>
+              <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Please enter a password with minimum eight characters, at least one letter and one number
+              </mat-error>
+            </mat-form-field>
+          </form>
+
+          <button class="submitButton" mat-raised-button color="primary" (click)="signUp()">Sign up</button>
+        </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="signIp" *ngIf="!viewState" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-title>Sign in</mat-card-title>
+        <mat-card-content >
+          <form class="example-form" fxLayout="column">
+            <mat-form-field>
+              <input matInput placeholder="Email" [formControl]="emailFormControl" required>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                This field is required
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('pattern')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input type="password" matInput placeholder="Password" required [formControl]="passwordFormControl">
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                This field is required
+              </mat-error>
+              <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Please enter a password with minimum eight characters, at least one letter and one number
+              </mat-error>
+            </mat-form-field>
+          </form>
+
+          <button class="submitButton" mat-raised-button color="primary" (click)="signIn()">Sign in</button>
+        </mat-card-content>
+    </mat-card>
+  </div>
+</div>
