@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { MatFormFieldModule, MatInputModule, MatTableModule, MatButtonModule, MatIconModule, MatCardModule} from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatTableModule, MatButtonModule, MatIconModule, MatCardModule, MatToolbarModule} from '@angular/material';
 
 import { PlatformModule } from '@angular/cdk/platform';
 import { ObserversModule } from '@angular/cdk/observers';
@@ -14,6 +14,7 @@ import { ObserversModule } from '@angular/cdk/observers';
     MatTableModule,
     MatIconModule,
     MatCardModule,
+    MatToolbarModule,
     ObserversModule,
     PlatformModule
   ]

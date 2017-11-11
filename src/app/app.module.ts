@@ -13,16 +13,19 @@ import { RouterModule } from '@angular/router';
 
 //Component dependencies
 import { AppComponent } from './app.component';
+import { TopBarComponent } from './layout/TopBar.component';
 
 //Module providers
 import { Angular2TokenService } from 'angular2-token';
 import { JWTHandlerService } from './shared/JWTHandler.service';
 import { httpWrapperService } from './shared/httpWrapper.service';
 import { LoginService } from './login/Login.service';
+import { ParamsService } from './shared/params.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { LoginService } from './login/Login.service';
     Angular2TokenService,
     JWTHandlerService,
     httpWrapperService,
-    LoginService
+    LoginService,
+    ParamsService
   ],
   bootstrap: [AppComponent]
 })
