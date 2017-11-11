@@ -1,23 +1,29 @@
 import { Component } from '@angular/core';
 
+import { TopBarComponent } from './layout/TopBar.component';
 
-// import { httpWrapperService } from './shared/httpWrapper.service';
+import { httpWrapperService } from './shared/httpWrapper.service';
+import { JWTHandlerService } from './shared/JWTHandler.service';
+import { ParamsService } from './shared/params.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'app';
+  params:any;
+  paramsSub: any;
 
   constructor(
-    // private _httpWrapperService: httpWrapperService
-  ){}
-
-  // backEndHelloWorld():void {
-  //   this._httpWrapperService.get('helloworld')
-  //     .then(response => alert(response))
-  //     .catch(err => console.error(err));
-  // }
+    private _JWTHandlerService: JWTHandlerService,
+    private _httpWrapperService: httpWrapperService,
+    private _ParamsService: ParamsService
+  ){
+    this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
+      params ? this.params = params : ''
+      console.log(this.params);
+    });
+  }
 }

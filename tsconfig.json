@@ -1,13 +1,20 @@
 {
   "compileOnSave": false,
+  "buildOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
+    "target": "es5",
+    "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "noEmitOnError": false,
+    "strictNullChecks": false,
+    "baseUrl": "./src",
+    "paths": { },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -15,5 +22,10 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "atom": { "rewriteTsconfig": false },
+  "exclude": [
+      "node_modules",
+      "dist"
+    ]
 }
