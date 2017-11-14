@@ -10,6 +10,7 @@ import { ROUTES } from './app.routes';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Component dependencies
 import { AppComponent } from './app.component';
@@ -21,6 +22,8 @@ import { JWTHandlerService } from './shared/JWTHandler.service';
 import { httpWrapperService } from './shared/httpWrapper.service';
 import { LoginService } from './login/Login.service';
 import { ParamsService } from './shared/params.service';
+import { UserService } from './shared/User.service';
+import { LocalsService } from './shared/Locals.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ParamsService } from './shared/params.service';
     RouterModule,
     FlexLayoutModule,
     CustomMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
   providers: [
@@ -41,7 +46,9 @@ import { ParamsService } from './shared/params.service';
     JWTHandlerService,
     httpWrapperService,
     LoginService,
-    ParamsService
+    ParamsService,
+    UserService,
+    LocalsService
   ],
   bootstrap: [AppComponent]
 })

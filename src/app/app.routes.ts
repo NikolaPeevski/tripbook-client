@@ -15,5 +15,9 @@ export const ROUTES: Routes = [
     {
       path: 'home',
       loadChildren: './home#HomeModule'
+    },
+    {
+      path: 'search',
+      loadChildren: './search#SearchModule'
     }
 ]

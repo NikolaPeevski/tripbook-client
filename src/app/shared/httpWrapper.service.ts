@@ -31,7 +31,7 @@ export class httpWrapperService {
    * @param  {boolean   =                 true}        isAPI  Is internal or external request
    * @return {Promise<any>}                   Json type response in the form of a promise
    */
-  get(url:string, additionalHeaders: any = {}, isAPI: boolean = true) : Promise<any> {
+  get(url: string, additionalHeaders: any = {}, isAPI: boolean = true) : Promise<any> {
     return new Promise((resolve, reject) => {
         (<any>this._Angular2TokenService.get(`${url}`, additionalHeaders))
           .map( response => response)
@@ -39,6 +39,28 @@ export class httpWrapperService {
               .then(data => resolve(data.json())) //TODO: this.isJson(data) ? data : add this when Content-Type is fixed
               .catch(err => reject(err));
               //TODO: Implement error service.
+    });
+  }
+
+  post(url: string, payload: any = {}, additionalHeaders: any = {}, isAPI: boolean = true) : Promise<any> {
+    return new Promise((resolve, reject) => {
+        (<any>this._Angular2TokenService.post(`${url}`, payload, additionalHeaders))
+          .map( response => response)
+            .toPromise()
+              .then(data => resolve(data.json())) //TODO: this.isJson(data) ? data : add this when Content-Type is fixed
+              .catch(err => reject(err));
+              //TODO: Implement error service.
+    });
+  }
+
+  put(url: string, payload: any = {}, additionalHeaders: any = {}, isAPI: boolean = true): Promise<any> {
+    return new Promise((resolve, reject) => {
+      (<any>this._Angular2TokenService.put(`${url}`, payload, additionalHeaders))
+        .map(response => response)
+          .toPromise()
+            .then(data => resolve(data.json())) //TODO: this.isJson(data) ? data : add this when Content-Type is fixed
+            .catch(error => reject(error));
+            //TODO: Implement error service.
     });
   }
 
