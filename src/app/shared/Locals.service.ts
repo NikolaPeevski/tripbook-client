@@ -17,40 +17,24 @@ export class LocalsService {
   createLocal(country_id, city_id, description:string = '', quote:string = '', available: any = '', available_from = '', available_to = ''): Promise<any> {
     return new Promise((resolve, reject) => {
 
-    if (!country_id || !city_id) return reject();
+      if (!country_id || !city_id) return reject();
 
-    const payload = {
-      local: {
-        description,
-        quote,
-        available,
-        available_from,
-        available_to,
-        country_id,
-        city_id
+      const payload = {
+        local: {
+          description,
+          quote,
+          available,
+          available_from,
+          available_to,
+          country_id,
+          city_id
+        }
       }
-    }
-    this._httpWrapperService.post(`${Constants.LOCALS}/`, payload)
-    .then(response => resolve(response))
-    .catch(error => reject(error));
-  });
+      this._httpWrapperService.post(`${Constants.LOCALS}/`, payload)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+    });
   }
-
-  // updateUserByProperty(property: string, value: string): Promise<any> {
-  //   return new Promise((resolve, reject) => {
-  //     if (this.user[property] === undefined) {
-  //       reject();
-  //       return;
-  //     }
-  //     this.user[property] = value;
-  //     const payload = {'user': this.user };
-  //
-  //
-  //     this._httpWrapperService.put(`${Constants.LOCALS}/${this.user.id}`, payload)
-  //       .then(response => resolve(response))
-  //       .catch(error => reject(error));
-  //   });
-  // }
 
   getLocalById(id: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -87,12 +71,42 @@ export class LocalsService {
     });
   }
 
-  searchLocals(value: string): Promise<any> {
+  getLocals(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!value) return reject();
 
-      this._httpWrapperService.get(`${Constants.LOCALS}?query=${value}`)
-        .then(response => {
+      this._httpWrapperService.get(`${Constants.LOCALS}`)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+    });
+  }
+
+  updateLocal(local: Local): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let payload = {
+        params: {
+          local
+        }
+      };
+      this._httpWrapperService.patch(`${Constants.LOCALS}/${local.id}`, payload)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+    });
+  }
+
+  deleteLocal(local: Local): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._httpWrapperService.delete(`${Constants.LOCALS}/${local.id}`)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+    });
+  }
+
+  searchLocals(keyword: string, country_id?: string, city_id?: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (!keyword) return reject();
+
+      this._httpWrapperService.get(`${Constants.LOCALS}?query=${keyword}${country_id ? '&country_id=' + country_id : ''}${city_id ? '&city_id=' + city_id : ''}`)
+        .then(response =>
           resolve(response.locals.map(el => {
             return {
               id: el.id,
@@ -117,9 +131,8 @@ export class LocalsService {
                 'updated_at': el.user.updated_at || ''
               }
             }
-          }))
-        })
-    })
+          }))).catch(error => reject(error));
+    });
   }
 
 }

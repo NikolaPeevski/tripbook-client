@@ -24,6 +24,9 @@ import { LoginService } from './login/Login.service';
 import { ParamsService } from './shared/params.service';
 import { UserService } from './shared/User.service';
 import { LocalsService } from './shared/Locals.service';
+import { AreaService } from './shared/Area.service';
+import { TripsService } from './shared/Trips.service';
+import { ReviewService } from './shared/Review.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { LocalsService } from './shared/Locals.service';
     LoginService,
     ParamsService,
     UserService,
-    LocalsService
+    LocalsService,
+    AreaService,
+    TripsService,
+    ReviewService
   ],
   bootstrap: [AppComponent]
 })

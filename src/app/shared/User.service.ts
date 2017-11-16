@@ -82,14 +82,13 @@ export class UserService {
     });
   }
 
-  searchUsers(value: string): Promise<any> {
+  searchUsers(keyword: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!value) return reject();
+      if (!keyword) return reject();
 
-      this._httpWrapperService.get(`${Constants.USERS}?query=${value}`)
+      this._httpWrapperService.get(`${Constants.USERS}?query=${keyword}`)
         .then(response => {
-          resolve(response.users.map(el => {
-            return {
+          resolve(response.users.map(el => ({
             'id': el.id,
             'local_id': el.local_id || '',
             'name': el.name || '',
@@ -101,10 +100,10 @@ export class UserService {
             'active': el.active || '',
             'created_at': el.created_at || '',
             'updated_at': el.updated_at || ''
-            }
-          }))
+          })));
         })
-    })
+        .catch(error => reject(error));
+    });
   }
 
 }

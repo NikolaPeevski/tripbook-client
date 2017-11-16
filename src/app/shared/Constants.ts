@@ -11,4 +11,9 @@ export class Constants {
   };
   public static LOCALS = 'locals';
   public static USERS = 'users';
+  public static TRIP_TYPE = {
+    'REQUEST': 1,
+    'OFFER': 2
+  }
+  public static REVIEW = 'reviews';
 }
