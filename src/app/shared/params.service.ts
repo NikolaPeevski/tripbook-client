@@ -13,10 +13,15 @@ export class ParamsService {
   private paramsSub = new BehaviorSubject<any>(false);
   public paramsObs = this.paramsSub.asObservable();
 
+  public previousParams = [];
+
   constructor (private _Router: Router) {
 
     this.subscription = this._Router.events.subscribe((event) => {
     if (event instanceof NavigationEnd) {
+
+        if (this.params)
+          this.previousParams = this.params;
 
         this.params = this.mapParamsFromUrl(event['urlAfterRedirects'] || event['url'] || this._Router.url);
         this.paramsSub.next(this.params);
