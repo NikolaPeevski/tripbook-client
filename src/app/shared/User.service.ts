@@ -31,7 +31,8 @@ export class UserService {
     'gender': data.gender || '',
     'active': data.active || '',
     'created_at': data.created_at || '',
-    'updated_at': data.updated_at || ''
+    'updated_at': data.updated_at || '',
+    'has_local': data.has_local || ''
     };
     // Notifies whoever's interested.
     this.userHolder.next(this.user);
@@ -75,7 +76,8 @@ export class UserService {
           'gender': response.gender || '',
           'active': response.active || '',
           'created_at': response.created_at || '',
-          'updated_at': response.updated_at || ''
+          'updated_at': response.updated_at || '',
+          'has_local': response.has_local || ''
           };
           resolve(user);
         }).catch(error => reject(error));

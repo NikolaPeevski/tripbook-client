@@ -6,18 +6,18 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CustomMaterialModule } from '../shared/material.module';
+import { ComponentsModule } from '../shared/components';
 
-import { HomeComponent } from './Home.component';
-
+import { LocalsComponent } from './Locals.component';
 
 export const routes = [
-    { path: '', component: HomeComponent, pathMatch: 'full'}
+    { path: '', component: LocalsComponent, page: '1'}
 ];
 
 @NgModule({
   declarations: [
     //Components come here
-    HomeComponent
+    LocalsComponent
   ],
   imports: [
     CommonModule,
@@ -25,9 +25,10 @@ export const routes = [
     ReactiveFormsModule,
     CustomMaterialModule,
     FlexLayoutModule,
+    ComponentsModule,
     RouterModule.forChild(routes),
   ],
 })
-export class HomeModule {
+export class LocalsModule {
   static routes = routes;
 }

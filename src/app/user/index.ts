@@ -7,17 +7,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CustomMaterialModule } from '../shared/material.module';
 
-import { HomeComponent } from './Home.component';
-
+import { UserComponent } from './User.component';
 
 export const routes = [
-    { path: '', component: HomeComponent, pathMatch: 'full'}
+    { path: '', component: UserComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
   declarations: [
     //Components come here
-    HomeComponent
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +27,6 @@ export const routes = [
     RouterModule.forChild(routes),
   ],
 })
-export class HomeModule {
+export class UserModule {
   static routes = routes;
 }

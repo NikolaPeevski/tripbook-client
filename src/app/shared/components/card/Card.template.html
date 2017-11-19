@@ -1,0 +1,11 @@
+<div *ngIf="data">
+  <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      {{data.user.email}} <br /> {{ city }}
+    </mat-card-content>
+    <mat-card-footer>
+      Rating...
+    </mat-card-footer>
+  </mat-card>
+</div>

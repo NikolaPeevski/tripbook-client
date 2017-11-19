@@ -14,7 +14,7 @@ export class LoginService {
                private _ParamsService: ParamsService,
                private _UserService: UserService) {}
 
-  signUp (first_name: string, last_name: string, email: string, password: string) {
+  signUp (first_name: string, last_name: string, email: string, password: string): Promise<any> {
     return new Promise<any>((resolve,reject) => {
 
       if (!first_name || !last_name || !email || !password) {
@@ -32,7 +32,7 @@ export class LoginService {
     });
   }
 
-  signIn (email: string, password:string) {
+  signIn (email: string, password:string): Promise<any> {
     return new Promise<any>((resolve,reject) => {
       if (!email || !password) {
         reject();
@@ -43,7 +43,7 @@ export class LoginService {
 
           this._UserService.defineUser(response.data);
           this._Router.navigateByUrl('/');
-          
+
           resolve();
         }).catch(error => reject(error));
     });

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 
+
 @Component({
   selector: 'home',
   templateUrl: './Home.template.html',
@@ -9,5 +10,9 @@ import { Component } from '@angular/core';
 
 export class HomeComponent {
 
-  constructor (){}
+  data: any = [];
+
+  constructor (){
+
+  }
 }

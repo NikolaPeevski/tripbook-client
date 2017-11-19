@@ -12,6 +12,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+//Modules
+import { ComponentsModule } from './shared/components';
+
 //Component dependencies
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './layout/TopBar.component';
@@ -42,6 +45,7 @@ import { ReviewService } from './shared/Review.service';
     CustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
   providers: [

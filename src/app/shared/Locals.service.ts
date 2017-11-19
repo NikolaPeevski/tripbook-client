@@ -63,18 +63,19 @@ export class LocalsService {
               'gender': response.user.gender || '',
               'active': response.user.active || '',
               'created_at': response.user.created_at || '',
-              'updated_at': response.user.updated_at || ''
+              'updated_at': response.user.updated_at || '',
+              'has_local': response.user.has_local || ''
             }
           };
-          resolve(local);
+          return resolve(local);
         }).catch(error => reject(error));
     });
   }
 
-  getLocals(): Promise<any> {
+  getLocals(pageId: number = 1): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      this._httpWrapperService.get(`${Constants.LOCALS}`)
+      this._httpWrapperService.get(`${Constants.LOCALS}?page=${pageId}`)
       .then(response => resolve(response))
       .catch(error => reject(error));
     });
@@ -128,7 +129,8 @@ export class LocalsService {
                 'gender': el.user.gender || '',
                 'active': el.user.active || '',
                 'created_at': el.user.created_at || '',
-                'updated_at': el.user.updated_at || ''
+                'updated_at': el.user.updated_at || '',
+                'has_local': response.has_local || ''
               }
             }
           }))).catch(error => reject(error));

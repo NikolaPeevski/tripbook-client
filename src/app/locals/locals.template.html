@@ -1,0 +1,4 @@
+<div id="locals" *ngIf="locals">
+    <Card *ngFor="let local of locals" [data]="local" [size]="size" (clickEmitter)="goToProfilePage($event)"></Card>
+  <h1>Potato</h1>
+</div>

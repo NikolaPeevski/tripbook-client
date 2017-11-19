@@ -1,22 +1,28 @@
 <div id="topBar">
-  <div class="navigation">
+  <mat-progress-spinner *ngIf="!params" mode="indeterminate" color="primary" >
+   </mat-progress-spinner>
+  <div class="navigation" *ngIf="params">
     <a class="clicky" (click)="navigateTo('home')"> <img src="assets/logo_symbol.svg"/></a> <!-- Add clicky-->
-    <button class="menu-button" mat-raised-button color="primary" (click)="navigateTo('home')">Home</button>
-    <button class="menu-button" mat-raised-button color="primary" (click)="navigateTo('#')">Trips</button>
-    <button class="menu-button" mat-raised-button color="primary" (click)="navigateTo('#')">Locals</button>
-    <button class="menu-button" mat-raised-button color="accent" (click)="navigateTo('login')">LOGIN</button>
+    <button *ngIf="params && params.currentModule === 'home'" class="menu-button" mat-raised-button color="primary" (click)="navigateTo('home')">Home</button>
+    <button *ngIf="params && params.currentModule !== 'home'" class="menu-button" mat-button color="primary" (click)="navigateTo('home')">Home</button>
+    <button *ngIf="params && params.currentModule === 'trips'" class="menu-button" mat-raised-button color="primary" (click)="navigateTo('trips')">Trips</button>
+    <button *ngIf="params && params.currentModule !== 'trips'" class="menu-button" mat-button color="primary" (click)="navigateTo('trips')">Trips</button>
+    <button *ngIf="params && params.currentModule === 'locals'" class="menu-button" mat-raised-button color="primary" (click)="navigateTo('locals')">Locals</button>
+    <button *ngIf="params && params.currentModule !== 'locals'" class="menu-button" mat-button color="primary" (click)="navigateTo('locals')">Locals</button>
+    <!-- Because currently conditional directives arent supported. -->
 
-    <button class="menu-button" mat-raised-button color="accent" (click)="updateUser()">LOGIN</button>
+    <button *ngIf="!_UserService.user" class="menu-button" mat-raised-button color="accent" (click)="navigateTo('login')">LOGIN</button>
+    <button *ngIf="_UserService.user" class="menu-button" mat-raised-button color="accent" (click)="logout()">LOGOUT</button>
+
+    <button class="menu-button" mat-raised-button color="accent" (click)="updateUser()">arg</button>
   </div>
-  <!-- <div class="search">
+  <div class="search">
     <form class="example-form" fxLayout="column">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Search" [matAutocomplete]="auto" [formControl]="searchFormContol">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let item of autocomplete" [value]="state.name">
-            <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-            <span>{{ state.name }}</span> |
-            <small>Population: {{state.population}}</small>
+        <input matInput placeholder="Search" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" [formControl]="searchFormContol">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+          <mat-option *ngFor="let item of autocomplete" [value]="item.name">
+            <span>{{ item.name }}</span>
           </mat-option>
         </mat-autocomplete>
         <mat-error *ngIf="searchFormContol.hasError('pattern')">
@@ -24,5 +30,5 @@
         </mat-error>
       </mat-form-field>
     </form>
-  </div> -->
+  </div>
 </div>

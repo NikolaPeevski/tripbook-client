@@ -101,7 +101,9 @@ signOut(): Promise<any> {
       (<any>this._Angular2TokenService.signOut())
         .map(response => response)
           .toPromise()
-            .then(data => resolve(data.json()))
+            .then(data => {
+              this._UserService.user = undefined;
+              resolve(data.json()) })
             .catch(error => reject(error));
     });
   }

@@ -15,13 +15,5 @@ export class AppComponent {
   params:any;
   paramsSub: any;
 
-  constructor(
-    private _JWTHandlerService: JWTHandlerService,
-    private _ParamsService: ParamsService
-  ){
-    this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
-      params ? this.params = params : ''
-
-    });
-  }
+  constructor(){}
 }

@@ -35,5 +35,5 @@ export class ReviewService {
         .then(response => response.reviews)
         .catch(error => console.error(error));
     });
-  } 
+  }
 }
