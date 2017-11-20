@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ParamsService } from '../shared/params.service';
 import { UserService } from '../shared/User.service';
 import { LocalsService } from '../shared/Locals.service';
+import { ModalWindowService } from '../shared/modalWindow.service';
 
 
 @Component({
@@ -12,32 +13,47 @@ import { LocalsService } from '../shared/Locals.service';
 })
 
 export class UserComponent {
-  private user: any;
+  user: any;
 
+  isGuest: boolean = false;
+  isUser: boolean = false;
   paramsSub: any;
   params:any;
 
+  userSub: any;
+
   constructor (private _ParamsService: ParamsService,
                private _UserService: UserService,
-               private _LocalService: LocalsService) {
+               private _LocalService: LocalsService,
+               private _ModalWindowService: ModalWindowService) {
     this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
       if (params) {
         this.params = params;
-        this._UserService.getUserById(this.params.path.substr(1))
+        if (this.params.path !== '/')
+        this._UserService.getUserById(this.params.path)
           .then(user => {
+            console.log(this._UserService.user);
+            this.isUser = (this._UserService.user && this._UserService.user.email ? this._UserService.user.email === user.email : false);
+            console.log(this.params, this.isGuest, this._UserService.user, user.has_local)
+            this.isGuest = this._UserService.isGuest();
             if (user.has_local)
               setTimeout( () => {this._LocalService.getLocalById(user.local_id)
                 .then(local => this.user = local)
                 .catch(error => console.error(error)) }, 50);
               else this.user = user;
           }).catch(error => console.error(error));
-
-      }
+        }
     });
+
+    console.log(!this.isGuest);
   }
 
   ngOnDestroy() {
     if (this.paramsSub)
       this.paramsSub.unsubscribe();
+  }
+
+  localApply(): void {
+    this._ModalWindowService.openModal();
   }
 }

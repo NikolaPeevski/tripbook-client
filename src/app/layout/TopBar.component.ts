@@ -12,6 +12,7 @@ import { UserService } from '../shared/User.service';
 import { JWTHandlerService } from '../shared/JWTHandler.service';
 import { AreaService } from '../shared/Area.service';
 import { ParamsService } from '../shared/params.service';
+import { SearchService } from '../shared/Search.service';
 
 @Component({
   selector: 'topBar',
@@ -26,16 +27,22 @@ export class TopBarComponent {
   SEARCH_REGEX = /^[a-zA-Z ]*$/;
   searchFormContol = new FormControl();
   autocomplete: any =  [];
-  params:any;
-  searchSub:any;
-  paramSub:any;
+  params: any;
+  user: any;
+
+  searchSub: any;
+  paramSub: any;
+  userSub: any;
+
+  selectedTab: any = 0;
 
   constructor (private _Router: Router,
                private _ReviewService: ReviewService,
                private _UserService: UserService,
                private _JWTHandlerService: JWTHandlerService,
                private _AreaService: AreaService,
-               private _ParamsService: ParamsService) {
+               private _ParamsService: ParamsService,
+               private _SearchService: SearchService ) {
                  this.searchSub = this.keyUp
                  .map(event => event['target'].value)
                  .debounceTime(250)
@@ -47,7 +54,39 @@ export class TopBarComponent {
                    if (!params) return;
 
                    this.params = params;
-                   console.log(params);
+
+                   if (this.params.currentModule === 'search')
+                    if (this.params.path.indexOf('cities') === -1) {
+                      let currentTab = decodeURIComponent((this.params.path.split('tab=')).pop());
+
+                      switch(currentTab) {
+                        case 'locals':
+                          this.selectedTab = 0;
+                          break;
+                        case 'reviews':
+                          this.selectedTab = 1;
+                          break;
+                        case 'trips':
+                          this.selectedTab = 2;
+                          break;
+                        case 'requested trips':
+                          this.selectedTab = 3;
+                          break;
+                        default:
+                        this.selectedTab = 0;
+                        break;
+                      }
+                    }
+
+                 });
+                 this.userSub = this._UserService.currentUser.subscribe(user => {
+                   if (!user || !user.email || !user.email.length) {
+                     if (this.user)
+                        this.user = undefined;
+                     return
+                   };
+                   this.user = user;
+                   console.log(this.user);
                  });
                }
 
@@ -76,13 +115,34 @@ export class TopBarComponent {
   }
 
   optionSelected($event: any): void {
-    //Dont judge me for I have cheesed
-    let index = $event.option._id.split('-').pop();
+    console.log(this.autocomplete);
+    let iterator = this.autocomplete.length;
+    let index = -1;
+
+    while(iterator --)
+      if (this.autocomplete[iterator].name === $event.option.value)
+        index = iterator;
+
+    this._SearchService.searchFor($event.option.value, this.autocomplete[index].type);
 
   }
 
   ngOnDestroy() {
     if (this.searchSub)
       this.searchSub.unsubscribe();
+    if (this.paramSub)
+      this.paramSub.unsubscribe();
+    if (this.userSub)
+      this.userSub.unsubscribe();
+  }
+
+  navigateSearchTab(tab: any): void {
+    let searchParams = (this.params.path.split('/').pop()).split('?tab=');
+
+    this._SearchService.searchFor(searchParams[0], '', encodeURIComponent(tab.tab.textLabel.toLowerCase()));
+  }
+
+  goToProfilePage(): void {
+    this._Router.navigateByUrl(`user/${this.user.id}`);
   }
 }

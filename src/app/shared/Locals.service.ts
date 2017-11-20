@@ -102,13 +102,13 @@ export class LocalsService {
     });
   }
 
-  searchLocals(keyword: string, country_id?: string, city_id?: string): Promise<any> {
+  searchLocals(keyword?: string, country_id?: string, city_id?: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!keyword) return reject();
 
-      this._httpWrapperService.get(`${Constants.LOCALS}?query=${keyword}${country_id ? '&country_id=' + country_id : ''}${city_id ? '&city_id=' + city_id : ''}`)
-        .then(response =>
-          resolve(response.locals.map(el => {
+      this._httpWrapperService.get(`${Constants.LOCALS}?${keyword ? 'query=' + keyword + '&' : ''}${country_id ? 'country_id=' + country_id + '&' : ''}${city_id ? 'city_id=' + city_id  + '&': ''}`)
+      .then(response => {
+
+          let results = response.locals.map(el => {
             return {
               id: el.id,
               available: el.available || false,
@@ -133,7 +133,10 @@ export class LocalsService {
                 'has_local': response.has_local || ''
               }
             }
-          }))).catch(error => reject(error));
+          });
+          
+          return resolve(results);
+        }).catch(error => reject(error));
     });
   }
 

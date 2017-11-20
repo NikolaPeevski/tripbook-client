@@ -28,7 +28,7 @@ export class AreaService {
           country: response.country,
           cities: ''
         };
-        resolve(city);
+        return resolve(city);
       }).catch(error => reject(error));
     });
   }
@@ -47,7 +47,7 @@ export class AreaService {
           cities: response.cities,
           country: ''
         };
-        resolve(city);
+        return resolve(city);
       }).catch(error => reject(error));
     });
   }
@@ -65,11 +65,11 @@ export class AreaService {
             type: el.type,
             url: el.url,
             cities: el.cities || '',
-            country: el.country || ''
+            country: el.parent_area || ''
           };
           return Area;
         });
-        resolve (results);
+        return resolve (results);
       })
       .catch(error => reject(error));
     });

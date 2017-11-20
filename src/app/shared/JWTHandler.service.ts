@@ -65,13 +65,13 @@ export class JWTHandlerService {
       .catch(error => {});
   }
 
-  signUp(first_name: string, last_name: string, email: string, password: string): Promise<any> {
+  signUp(name: string, email: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const data:RegisterData = {
         email: email,
         password: password,
         passwordConfirmation: password,
-        name: `${first_name} ${last_name}`
+        name: name
       };
 
       (<any>this._Angular2TokenService.registerAccount(data))
@@ -102,7 +102,7 @@ signOut(): Promise<any> {
         .map(response => response)
           .toPromise()
             .then(data => {
-              this._UserService.user = undefined;
+              this._UserService.defineUser({});
               resolve(data.json()) })
             .catch(error => reject(error));
     });
