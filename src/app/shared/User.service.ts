@@ -20,7 +20,7 @@ export class UserService {
   user:User;
 
   defineUser(data: any): void {
-    console.log('defineUser');
+    console.log(data);
     this.user = {
     'id': data.id || '',
     'local_id': data.local_id || '',

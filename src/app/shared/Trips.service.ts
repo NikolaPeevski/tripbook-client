@@ -34,6 +34,29 @@ export class TripsService {
     });
   }
 
+  getTrips(sorting?:string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._httpWrapperService.get(`${Constants.TRIPS}${sorting ? '?sort=' + sorting + '&' : ''}`)
+        .then(trips => resolve(trips))
+    });
+  }
+
+  getTrip(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._httpWrapperService.get(`${Constants.TRIPS}/${id}`)
+        .then(trip => resolve(trip))
+        .catch(error => reject(error));
+    });
+  }
+
+  getTripsByCity(cityId: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._httpWrapperService.get(`${Constants.TRIPS}?city_id=${cityId}`)
+        .then(trips => resolve(trips.trips))
+        .catch(error => reject(error));
+    });
+  }
+
 
 
 }

@@ -9,9 +9,9 @@
     <button *ngIf="params && params.currentModule !== 'trips'" class="menu-button" mat-button color="primary" [matMenuTriggerFor]="trip_menu">Trips</button>
     <mat-menu #trip_menu="matMenu">
       <!-- Weird right -->
-      <button mat-menu-item *ngIf="user">{{ user.has_local ? 'My Trips/Bookings' : 'My Bookins'}}</button>
-      <button mat-menu-item>Best Rated Trips</button>
-      <button mat-menu-item>Popular Trips</button>
+      <button mat-menu-item *ngIf="user" (click)="navigateTo('trips/my')">{{ user.has_local ? 'My Trips/Bookings' : 'My Bookins'}}</button>
+      <button mat-menu-item (click)="navigateTo('trips/rated')">Best Rated Trips</button>
+      <button mat-menu-item (click)="navigateTo('trips/popular')">Popular Trips</button>
     </mat-menu>
     <button *ngIf="params && params.currentModule === 'locals'" class="menu-button" mat-raised-button color="primary" (click)="navigateTo('locals')">Locals</button>
     <button *ngIf="params && params.currentModule !== 'locals'" class="menu-button" mat-button color="primary" (click)="navigateTo('locals')">Locals</button>
@@ -43,11 +43,16 @@
     </form>
   </div>
   <div class="searchTabs" *ngIf="params && params.currentModule === 'search'" fxLayoutAlign="center center">
-    <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user">
+    <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user && isOwnCity">
       <mat-tab label="Locals" ></mat-tab>
       <mat-tab label="Reviews" ></mat-tab>
       <mat-tab label="Trips" ></mat-tab>
       <mat-tab label="Requested trips"></mat-tab>
+    </mat-tab-group>
+    <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user && !isOwnCity">
+      <mat-tab label="Locals" ></mat-tab>
+      <mat-tab label="Reviews" ></mat-tab>
+      <mat-tab label="Trips" ></mat-tab>
     </mat-tab-group>
     <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1) && !user">
       <mat-tab label="Locals" ></mat-tab>

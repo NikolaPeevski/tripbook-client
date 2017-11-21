@@ -13,6 +13,7 @@ import { JWTHandlerService } from '../shared/JWTHandler.service';
 import { AreaService } from '../shared/Area.service';
 import { ParamsService } from '../shared/params.service';
 import { SearchService } from '../shared/Search.service';
+import { LocalsService } from '../shared/Locals.service';
 
 @Component({
   selector: 'topBar',
@@ -33,6 +34,7 @@ export class TopBarComponent {
   searchSub: any;
   paramSub: any;
   userSub: any;
+  isOwnCity: any;
 
   selectedTab: any = 0;
 
@@ -42,7 +44,8 @@ export class TopBarComponent {
                private _JWTHandlerService: JWTHandlerService,
                private _AreaService: AreaService,
                private _ParamsService: ParamsService,
-               private _SearchService: SearchService ) {
+               private _SearchService: SearchService,
+               private _LocalsService: LocalsService) {
                  this.searchSub = this.keyUp
                  .map(event => event['target'].value)
                  .debounceTime(250)
@@ -55,7 +58,9 @@ export class TopBarComponent {
 
                    this.params = params;
 
-                   if (this.params.currentModule === 'search')
+                   if (this.params.currentModule === 'search') {
+
+
                     if (this.params.path.indexOf('cities') === -1) {
                       let currentTab = decodeURIComponent((this.params.path.split('tab=')).pop());
 
@@ -75,9 +80,10 @@ export class TopBarComponent {
                         default:
                         this.selectedTab = 0;
                         break;
+                        }
                       }
+                      this.checkForOwnCity();
                     }
-
                  });
                  this.userSub = this._UserService.currentUser.subscribe(user => {
                    if (!user || !user.email || !user.email.length) {
@@ -86,7 +92,11 @@ export class TopBarComponent {
                      return
                    };
                    this.user = user;
-                   console.log(this.user);
+                   setTimeout(() => {
+
+                   this.checkForOwnCity();
+                  },50);
+
                  });
                }
 
@@ -106,6 +116,24 @@ export class TopBarComponent {
       .catch(error => console.error(error));
   }
 
+  checkForOwnCity(): void {
+    if (this.params && this.params.currentModule === 'search' && this.user && this.user.has_local) {
+
+      let search = (this.params.path.split('/').pop()).split('?tab=')
+      this._LocalsService.getLocalById(this.user.local_id)
+        .then(local => {
+          setTimeout(() => {
+            this._AreaService.searchAreas(search[0], true)
+              .then(city => {
+                this.isOwnCity = (city[0] && local.city_id === city[0].id)
+              });
+        }, 50);
+
+      })
+      .catch(error => console.error(error));
+    }
+  }
+
   onKeyUp(input: string): void {
     if (!input) return;
 
@@ -115,7 +143,6 @@ export class TopBarComponent {
   }
 
   optionSelected($event: any): void {
-    console.log(this.autocomplete);
     let iterator = this.autocomplete.length;
     let index = -1;
 

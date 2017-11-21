@@ -32,8 +32,8 @@ export class ReviewService {
     return new Promise((resolve, reject) => {
       //Add pagination handling.
       this._httpWrapperService.get(`${Constants.REVIEW}/${review_type}/${id}`)
-        .then(response => response.reviews)
-        .catch(error => console.error(error));
+        .then(response => resolve(response.reviews))
+        .catch(error => reject(error));
     });
   }
 }

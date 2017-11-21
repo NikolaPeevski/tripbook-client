@@ -31,7 +31,12 @@ export const ROUTES: Routes = [
     {
         path: 'trips',
         loadChildren: './trips#TripsModule'
+    },
+    {
+        path: 'trip/:tripId',
+        loadChildren: './trip#TripModule'
     }
+
 
 
 ]

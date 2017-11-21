@@ -1,3 +1,4 @@
+<div id="apply" *ngIf="type === 'apply'">
 <h1 matDialogTitle>
   Apply as a local!
 </h1>
@@ -6,10 +7,10 @@
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Tells us more about yourself!</ng-template>
         <mat-form-field>
-          <input matInput placeholder="More about your background!">
+          <input matInput placeholder="More about your background!" formControlName="background">
         </mat-form-field> <br />
         <mat-form-field>
-          <input matInput placeholder="An inspirational quote?">
+          <input matInput placeholder="An inspirational quote?" formControlName="quote">
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -20,28 +21,13 @@
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Fill out your city of choice</ng-template>
         <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+              <input matInput placeholder="Your desired city:" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" formControlName="city" required>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+                  <mat-option *ngFor="let item of autocomplete" [value]="item.name" (click)="selectCity(item)">
+                    <span>{{ item.name }}</span>
+                  </mat-option>
+                </mat-autocomplete>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>When are you available?</ng-template>
-        <mat-form-field>
-          <input matInput [matDatepicker]="dp3" placeholder="Available from?" disabled>
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [matDatepicker]="dp2" placeholder="Available to?" disabled>
-          <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-          <mat-datepicker #dp2 disabled="false"></mat-datepicker>
-        </mat-form-field>
-          <mat-checkbox>Always available?</mat-checkbox>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -52,8 +38,26 @@
       <ng-template matStepLabel>Done</ng-template>
       You are now done.
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="processData()">Close</button>
       </div>
     </mat-step>
 </mat-horizontal-stepper>
-<button mat-button mat-dialog-close (click)="onClose()">Close</button>
+</div>
+
+<div id="book" *ngIf="type === 'book'">
+  <h1 matDialogTitle>
+    Book a trip!
+  </h1>
+</div>
+
+<div id="create-trip" *ngIf="type === 'create-trip'">
+  <h1 matDialogTitle>
+    Book a trip!
+  </h1>
+</div>
+
+<div id="trip-request" *ngIf="type === 'request-trip'">
+  <h1 matDialogTitle>
+
+  </h1>
+</div>

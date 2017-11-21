@@ -19,11 +19,13 @@ export class CardComponent {
   private city: string = '';
 
   constructor (private _AreaService: AreaService){
-    console.log(this.data);
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data && changes.data.currentValue) {
+      
+      if (this.type === 'locals')
       this._AreaService.getCity(changes.data.currentValue.city_id)
         .then(city => this.city = `${city.name}, ${city.country.name}`)
         .catch(error => console.error(error));
@@ -31,6 +33,7 @@ export class CardComponent {
   }
 
   clicked(): void {
-    this.clickEmitter.emit(this.data.user.id);
+    if (this.type === 'locals')
+      this.clickEmitter.emit(this.data.user.id);
   }
 }

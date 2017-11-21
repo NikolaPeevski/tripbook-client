@@ -27,15 +27,14 @@ export class UserComponent {
                private _LocalService: LocalsService,
                private _ModalWindowService: ModalWindowService) {
     this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
-      if (params) {
+      if (params && params.currentModule === 'user') {
         this.params = params;
         if (this.params.path !== '/')
         this._UserService.getUserById(this.params.path)
           .then(user => {
-            console.log(this._UserService.user);
             this.isUser = (this._UserService.user && this._UserService.user.email ? this._UserService.user.email === user.email : false);
-            console.log(this.params, this.isGuest, this._UserService.user, user.has_local)
             this.isGuest = this._UserService.isGuest();
+
             if (user.has_local)
               setTimeout( () => {this._LocalService.getLocalById(user.local_id)
                 .then(local => this.user = local)
@@ -44,8 +43,6 @@ export class UserComponent {
           }).catch(error => console.error(error));
         }
     });
-
-    console.log(!this.isGuest);
   }
 
   ngOnDestroy() {
@@ -54,6 +51,6 @@ export class UserComponent {
   }
 
   localApply(): void {
-    this._ModalWindowService.openModal();
+    this._ModalWindowService.openModal('apply');
   }
 }

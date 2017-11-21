@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AreaService } from '../shared/Area.service';
 import { LocalsService } from '../shared/Locals.service';
 import { ReviewService } from '../shared/Review.service';
+import { TripsService } from '../shared/Trips.service';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -14,7 +15,8 @@ export class SearchService {
   constructor (private _Router: Router,
                private _AreaService: AreaService,
                private _LocalsService: LocalsService,
-               private _ReviewsService: ReviewService) {}
+               private _ReviewsService: ReviewService,
+               private _TripsService: TripsService) {}
 
   searchResultsSub: any;
 
@@ -41,22 +43,20 @@ export class SearchService {
 
   private searchByTab(keyword: string, tab: string, id: string, type: string): Promise<any> {
     return new Promise((resolve, reject) => {
+
       if (tab === 'locals')
           setTimeout(() => {
             this._LocalsService.searchLocals(null, type === 'country' ? id : null, type === 'city' ? id : null)
-            .then(results => {
-
-              return resolve(results);
-            })
+            .then(results => resolve(results))
             .catch(error => reject(error));
           }, 50);
-      console.log(tab);
+
       if (tab === 'cities')
           setTimeout(() => {
             this._AreaService.getCountry(id)
             .then(results => {
-              console.log(results);
-              return resolve(results);
+
+              return resolve(results.cities);
             })
             .catch(error => reject(error));
           }, 50);
@@ -64,12 +64,16 @@ export class SearchService {
       if (tab === 'reviews')
           setTimeout(() => {
             this._ReviewsService.getReview('city', id)
-            .then(results => {
-              console.log(results);
-              return resolve(results);
-            })
+            .then(results => resolve(results))
             .catch(error => reject(error));
           }, 50);
+
+    if (tab === 'trips')
+        setTimeout(() => {
+          this._TripsService.getTripsByCity(id)
+          .then(results => resolve(results))
+          .catch(error => reject(error));
+        }, 50);
 
     });
   }

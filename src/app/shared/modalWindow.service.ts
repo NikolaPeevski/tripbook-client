@@ -8,7 +8,7 @@ import { httpWrapperService } from './httpWrapper.service';
 
 import { Constants } from './Constants';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { modalWindowComponent } from './components/modalWindow/modalWindow.component';
 
 @Injectable()
@@ -18,8 +18,9 @@ export class ModalWindowService {
                private _MatDialog: MatDialog)
                {}
 
-  public openModal(): void {
-    this._MatDialog.open(modalWindowComponent);
+  public openModal(type: string, cityName?: string): void {
+    let config: MatDialogConfig = { data: { 'type': type, cityName}}
+    this._MatDialog.open(modalWindowComponent, config);
   }
 
 }
