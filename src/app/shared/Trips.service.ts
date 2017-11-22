@@ -14,19 +14,9 @@ export class TripsService {
 
   constructor (private _httpWrapperService: httpWrapperService) {}
 
-  createTrip(title: string, description: string, trip_type: string, city_IDs: any[], user_id: string, numberOfPeople: string): Promise<any> {
+  createTrip(trip: { title: string, description: string, numberOfPeople: string }): Promise<any> {
     return new Promise((resolve, reject) => {
-      const payload = {
-        trip: {
-              title,
-              description,
-              trip_type: `${Constants.TRIP_TYPE[trip_type]}`,
-              trip_status: '1',
-              user_id,
-              'number_of_people': numberOfPeople
-            },
-            'cities': city_IDs,
-          };
+      const payload = { trip };
 
       this._httpWrapperService.post(`${Constants.TRIPS}`, payload)
         .then(response => resolve(response))
@@ -53,6 +43,56 @@ export class TripsService {
     return new Promise((resolve, reject) => {
       this._httpWrapperService.get(`${Constants.TRIPS}?city_id=${cityId}`)
         .then(trips => resolve(trips.trips))
+        .catch(error => reject(error));
+    });
+  }
+
+  bookALocal(from_date: string, to_date: string, numberOfPeople: string, title: string, description: string, local_id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const payload = {
+        booking: {
+          from_date,
+          to_date,
+          'number_of_people': numberOfPeople
+        },
+        trip: {
+          title,
+          description,
+          local_id
+        }
+      }
+      this._httpWrapperService.post(`${Constants.BOOKING}`, payload)
+        .then(booking => resolve(booking))
+        .catch(error => reject(error));
+    });
+  }
+
+  requestATrip(from_date: string, to_date: string, numberOfPeople: string, title: string, description: string, city_id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const payload = {
+        booking: {
+          from_date,
+          to_date,
+          'number_of_people': numberOfPeople
+        },
+        trip: {
+          title,
+          description,
+          city_id
+        }
+      }
+      this._httpWrapperService.post(`${Constants.BOOKING}`, payload)
+        .then(booking => resolve(booking))
+        .catch(error => reject(error));
+    });
+  }
+
+  getTripRequests(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (!id) return reject();
+
+      this._httpWrapperService.get(`${Constants.TRIPS}/public?city_id=${id}`)
+        .then(requests => resolve(requests.trips))
         .catch(error => reject(error));
     });
   }

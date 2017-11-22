@@ -75,6 +75,13 @@ export class SearchService {
           .catch(error => reject(error));
         }, 50);
 
+    if (tab === 'requested trips')
+        setTimeout(() => {
+          this._TripsService.getTripRequests(id)
+          .then(results => resolve(results))
+          .catch(error => reject(error));
+        }, 50);
+
     });
   }
 }

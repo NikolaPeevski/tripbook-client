@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ModalWindowService } from '../../shared/modalWindow.service';
+
 
 @Component({
   selector: 'trips',
@@ -9,5 +11,9 @@ import { Component } from '@angular/core';
 
 export class TripsComponent {
 
-  constructor (){}
+  constructor (private _ModalWindowService: ModalWindowService){}
+
+  createTripOffer() :void {
+    this._ModalWindowService.openModal('create-trip');
+  }
 }

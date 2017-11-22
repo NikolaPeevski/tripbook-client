@@ -53,4 +53,8 @@ export class UserComponent {
   localApply(): void {
     this._ModalWindowService.openModal('apply');
   }
+
+  bookATrip(): void {
+    this._ModalWindowService.openModal('book', null, this.user.id);
+  }
 }

@@ -16,4 +16,5 @@ export class Constants {
     'OFFER': 2
   }
   public static REVIEW = 'reviews';
+  public static BOOKING = 'bookings';
 }

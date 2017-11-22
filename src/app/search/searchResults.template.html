@@ -3,7 +3,7 @@
     <div class="locals" *ngIf="type === 'locals'">
       <Card *ngFor="let result of searchResults" [data]="result" [type]="type" [size]="size" (clickEmitter)="goToProfilePage($event)"></Card>
     </div>
-    <div class="tripRequest" *ngIf="type === 'requested trips'">
+    <div class="trip" *ngIf="type === 'trips'">
       <button *ngIf="user" (click)="createTripRequest()" mat-button color="primary">Request a trip</button>
     </div>
   </div>

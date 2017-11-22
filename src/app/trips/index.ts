@@ -8,19 +8,23 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomMaterialModule } from '../shared/material.module';
 
 import { TripsComponent } from './my/Trips.component';
+import { RatedTripsComponent } from './rated/RatedTrips.component';
+import { PopularTripsComponent } from './popular/PopularTrips.component';
 
 export const routes = [
     { path: '', redirectTo: 'rated'},
     { path: 'my', redirectTo: 'my/trips'},
     { path: 'my/trips', component: TripsComponent, pathMatch: 'full'},
-    { path: 'rated', component: TripsComponent, pathMatch: 'full'},
-    { path: 'popular', component: TripsComponent, pathMatch: 'full'},
+    { path: 'rated', component: RatedTripsComponent, pathMatch: 'full'},
+    { path: 'popular', component: PopularTripsComponent, pathMatch: 'full'},
 ];
 
 @NgModule({
   declarations: [
     //Components come here
-    TripsComponent
+    TripsComponent,
+    RatedTripsComponent,
+    PopularTripsComponent
   ],
   imports: [
     CommonModule,

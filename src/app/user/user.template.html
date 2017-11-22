@@ -2,6 +2,6 @@
   <pre *ngIf="user">
     {{ user | json }}
   </pre>
-  <button *ngIf="params && !isGuest && !isUser && user && user.available" mat-button color="primary">Book a trip</button>
+  <button *ngIf="params && !isGuest && !isUser && user && user.available" (click)="bookATrip()" mat-button color="primary">Book a trip</button>
   <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-button color="primary" (click)="localApply()">Apply as a local person.</button>
 </div>

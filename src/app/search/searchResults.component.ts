@@ -66,7 +66,6 @@ export class SearchResultsComponent {
     //TODO: Show the rest of the results
     this._SearchService.search(keyword, tab)
      .then(results => {
-
        this.searchResults = results.splice(0, 9)})
      .catch(error => console.error(error))
      .finally(() => this.searching = false);
