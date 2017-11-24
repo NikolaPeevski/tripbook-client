@@ -1,4 +1,4 @@
-<div id="searchResults">
+<div id="searchResults" class="container">
   <div class="results" *ngIf="searchResults">
     <div class="locals" *ngIf="type === 'locals'">
       <Card *ngFor="let result of searchResults" [data]="result" [type]="type" [size]="size" (clickEmitter)="goToProfilePage($event)"></Card>
