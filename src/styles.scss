@@ -25,3 +25,33 @@ $trip-book-theme: mat-light-theme($trip-book-primary, $trip-book-accent, $trip-b
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($trip-book-theme);
+
+* {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+// @media (min-width: 1200px) {
+//   .container {
+//     width: 1170px;
+//   }
+// }

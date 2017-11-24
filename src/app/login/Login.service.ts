@@ -17,10 +17,6 @@ export class LoginService {
   signUp (name: string, email: string, password: string): Promise<any> {
     return new Promise<any>((resolve,reject) => {
 
-      if (!name || !email || !password) {
-        reject();
-        return;
-      }
 
       this._JWTHandlerService.signUp(name, email, password)
         .then(response => {
@@ -34,10 +30,8 @@ export class LoginService {
 
   signIn (email: string, password:string): Promise<any> {
     return new Promise<any>((resolve,reject) => {
-      if (!email || !password) {
-        reject();
-        return;
-      }
+ 
+      
       this._JWTHandlerService.signIn(email, password)
         .then(response => {
 

@@ -1,29 +1,123 @@
-.switchState {
-  margin-bottom: 10px;
+@import '../../assets/palette.scss';
+$distance-from-top: 15vh;
+
+.linkAfterCard {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-top: 5px;
+  display: block;
+  position: absolute;
+  bottom: -25px;
+  color: $primary-text-color;
+  left: 0;
+
+  &:hover {
+    cursor: pointer;
+    color: $secondary-text-color;
+  }
+
+  .material-icons {
+    bottom: -4px;
+    position: relative;
+    font-size: 18px;
+  }
 }
 
-.signUp {
-  // max-width: 400px;
+.switchState {
+  left: initial;
+  right: 0;
 }
 
 .submitButton {
   margin-top: 20px;
 }
 
-// .example-form {
-//   min-width: 300px;
-//   max-width: 500px;
-//   width: 100%;
-// }
-//
-// .example-full-width {
-//   width: 100%;
-// }
-// mat-card {
-//     min-width: 150px;
-//     max-width: 400px;
-// }
-
 mat-form-field {
   margin-right: 5px;
+}
+
+.loginBg {
+  background-color: $accent-color;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $distance-from-top * 2;
+  z-index: -1;
+}
+
+.loginBlock {
+  margin-top: $distance-from-top;
+}
+
+mat-card {
+  text-align: left;
+  padding: 0;
+
+  .mat-card-child {
+    min-width: 55vw;
+  }
+
+  mat-card-content {
+    padding-top: 30px;
+  }
+
+  form {
+    padding-bottom: 20px;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.authBlock {
+  
+  padding: 24px;
+}
+
+.welcomeBlock {
+  padding: 24px;
+  text-align: center;
+  background-image: url('/assets/login-img-bg.jpg');
+  color: white;    
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px 0px 0px 2px;
+
+  .welcomeBlock-Greeting {
+    font-weight: bold;
+    font-size: 2em;
+    margin-top: 80px;
+    margin-bottom: 40px;
+  }
+
+  .welcomeBlock-Logo {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 300px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  ul {
+    max-width: 250px;
+    margin: 0 auto;
+
+    li {
+      text-align: left;
+      list-style-type: none;
+      color: #ffffffa3;
+
+      .material-icons {
+        color: $accent-color;
+        font-size: 14px;
+        position: relative;
+        top: 1px;
+        right: 4px;
+      }
+    }
+  }
 }

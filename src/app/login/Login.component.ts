@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 
 import { LoginService } from './Login.service';
+import { ModalWindowService } from '../shared/modalWindow.service';
+import { ParamsService } from '../shared/params.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -24,7 +27,11 @@ export class LoginComponent {
   //false - singIn; true - signUp
   viewState: boolean = false;
 
-  constructor (private _LoginService: LoginService){}
+  constructor (private _LoginService: LoginService, 
+               private _Router: Router,
+               private _ParamsService: ParamsService,
+               private _ModalWindowService: ModalWindowService
+              ){}
 
   switchState(): void {
     this.viewState = !this.viewState;
@@ -34,14 +41,23 @@ export class LoginComponent {
 
     this._LoginService.signUp(this.nameFormControl.value, this.emailFormControl.value, this.passwordFormControl.value)
       .then(status => {})
-      .catch(error => console.error(error));
+      .catch(error => this._ModalWindowService.openModal('errors', null, null, null, error.json().errors.full_messages));
   }
 
   signIn(): void {
 
     this._LoginService.signIn(this.emailFormControl.value, this.passwordFormControl.value)
       .then(status => {})
-      .catch(error => console.error(error));
+      .catch(error => this._ModalWindowService.openModal('error', null, null, null, error.json()['errors']));
+  }
+
+  goBack(): void {
+
+    let previousModule = this._ParamsService.previousParams && this._ParamsService.previousParams['currentModule']  ? this._ParamsService.previousParams['currentModule'] : 'home';
+
+    this._Router.navigateByUrl(`${previousModule}`)
   }
 
 }
+
+
