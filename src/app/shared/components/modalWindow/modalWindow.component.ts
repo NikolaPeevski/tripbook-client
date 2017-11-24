@@ -51,6 +51,8 @@ export class modalWindowComponent {
 
   trip_id: any;
 
+  error: any;
+
   constructor(private dialogRef: MatDialogRef<modalWindowComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private _formBuilder: FormBuilder,
@@ -70,6 +72,7 @@ export class modalWindowComponent {
                 this.selectedCity = this.data.cityName || '';
                 this.local_id = this.data.local_id || '';
                 this.trip_id = this.data.trip_id || '';
+                this.error = this.data.error || '';
                 console.log(this.data);
               }
 

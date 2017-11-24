@@ -293,3 +293,19 @@
       </mat-step>
   </mat-horizontal-stepper>
 </div>
+<div id="error" *ngIf="type === 'error' && error">
+  <h1 matDialogTitle>
+    Error!
+  </h1>
+  <div matDialogContent> {{ error }}</div>
+</div>
+<div id="error" *ngIf="type === 'errors' && error">
+  <h1 matDialogTitle>
+    Error!
+  </h1>
+  <div matDialogContent>
+      <div *ngFor="let the_value of error">
+          {{ the_value }}
+      </div>
+  </div>
+</div>

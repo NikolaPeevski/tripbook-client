@@ -74,7 +74,7 @@ export class JWTHandlerService {
         name: name
       };
 
-      (<any>this._Angular2TokenService.registerAccount(data))
+      this._Angular2TokenService.registerAccount(data)
         .map( response => response)
           .toPromise()
             .then(data => resolve(data.json())) //TODO: this.isJson(data) ? data : add this when Content-Type is fixed
@@ -88,7 +88,7 @@ export class JWTHandlerService {
         email: email,
         password: password
       };
-      (<any>this._Angular2TokenService.signIn(data))
+      this._Angular2TokenService.signIn(data)
         .map(response => response)
           .toPromise()
             .then(data => resolve(data.json()))
@@ -98,7 +98,7 @@ export class JWTHandlerService {
 
 signOut(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      (<any>this._Angular2TokenService.signOut())
+      this._Angular2TokenService.signOut()
         .map(response => response)
           .toPromise()
             .then(data => {
@@ -110,7 +110,7 @@ signOut(): Promise<any> {
 
   validateToken(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      (<any>this._Angular2TokenService.validateToken())
+      this._Angular2TokenService.validateToken()
         .map(response => response)
           .toPromise()
             .then(data => resolve(data.json()))
