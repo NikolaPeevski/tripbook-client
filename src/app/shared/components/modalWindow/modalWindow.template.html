@@ -46,7 +46,7 @@
 
 <div id="book" *ngIf="type === 'book'">
   <h1 matDialogTitle>
-    Book a trip!
+    Book a local for a trip!
   </h1>
   <mat-horizontal-stepper [linear]="true">
     <mat-step [stepControl]="firstFormGroup">
@@ -240,6 +240,55 @@
         You are now done.
         <div>
           <button mat-button (click)="requestATrip()">Close</button>
+        </div>
+      </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+<div id="book-trip" *ngIf="type === 'book-trip'">
+  <h1 matDialogTitle>
+    Book a trip!
+  </h1>
+  <mat-horizontal-stepper [linear]="true">
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Number of people</ng-template>
+          <mat-form-field>
+                <mat-select placeholder="Number of people">
+                  <mat-option *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" [value]="number" (click)="selectNumberOfPeople(number)" required>
+                    {{ number }}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="forthFormGroup">
+        <form [formGroup]="forthFormGroup">
+          <ng-template matStepLabel>In what period will be your trip?</ng-template>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp3" placeholder="From date" formControlName="from" required>
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 ></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp2" placeholder="To date" formControlName="to" required>
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2 ></mat-datepicker>
+            </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-button (click)="bookATrip()">Close</button>
         </div>
       </mat-step>
   </mat-horizontal-stepper>

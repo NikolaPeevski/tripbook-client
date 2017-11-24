@@ -5,6 +5,7 @@
     </div>
     <div class="trip" *ngIf="type === 'trips'">
       <button *ngIf="user" (click)="createTripRequest()" mat-button color="primary">Request a trip</button>
+      <Card *ngFor="let trip of searchResults" (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
     </div>
   </div>
 </div>

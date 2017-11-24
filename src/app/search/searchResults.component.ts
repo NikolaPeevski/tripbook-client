@@ -27,6 +27,8 @@ export class SearchResultsComponent {
 
   currentCity: string;
 
+  tripsType = ['booking', 'trip-offer'];
+
 
   constructor (private _ParamsService: ParamsService,
                private _SearchService: SearchService,
@@ -77,5 +79,9 @@ export class SearchResultsComponent {
 
   createTripRequest(): void {
     this._ModalWindowService.openModal('request-trip', this.currentCity);
+  }
+
+  goToTripPage($event: any): void {
+    this._Router.navigateByUrl(`trip/${$event}`);
   }
 }

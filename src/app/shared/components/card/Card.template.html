@@ -1,4 +1,4 @@
-<div *ngIf="data">
+<div *ngIf="data && (type === 'locals' || type === 'local')">
   <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
     <mat-card-content>
@@ -6,6 +6,27 @@
     </mat-card-content>
     <mat-card-footer>
       Rating...
+    </mat-card-footer>
+  </mat-card>
+</div>
+<div *ngIf="data && (type === 'trip-offer')">
+  <mat-card class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
+    <mat-card-title>
+      {{ data.title }}
+    </mat-card-title>
+    <mat-card-content>
+      {{data.user.email}}
+    </mat-card-content>
+    <mat-card-content>
+      {{data.description}}
+    </mat-card-content>
+    <mat-card-footer>
+      <span>
+        Rating...
+      </span>
+      <span>
+        <button mat-button (click)="clicked()">OPEN TRIP</button>
+      </span>
     </mat-card-footer>
   </mat-card>
 </div>

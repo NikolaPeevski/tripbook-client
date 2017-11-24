@@ -87,12 +87,55 @@ export class TripsService {
     });
   }
 
+  bookATrip(from_date: string, to_date: string, numberOfPeople: string, trip_id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const payload = {
+        booking: {
+          trip_id,
+          number_of_people: numberOfPeople,
+          from_date,
+          to_date
+        }
+      };
+
+      this._httpWrapperService.post(`${Constants.BOOKING}`, payload)
+        .then(booking => resolve(booking))
+        .catch(error => reject(error));
+    });
+  }
+
   getTripRequests(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (!id) return reject();
 
       this._httpWrapperService.get(`${Constants.TRIPS}/public?city_id=${id}`)
         .then(requests => resolve(requests.trips))
+        .catch(error => reject(error));
+    });
+  }
+
+  getPrivateBookings(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._httpWrapperService.get(`${Constants.BOOKING}`)
+        .then(bookings => resolve(bookings.bookings))
+        .catch(error => reject(error));
+    });
+  }
+
+  getPrivateTrips(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._httpWrapperService.get(`${Constants.TRIPS}/private`)
+        .then(privates => resolve(privates.trips))
+        .catch(error => reject(error));
+    });
+  }
+
+  handleBooking(id: string, action: string) : Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (!id || !action) reject();
+
+      this._httpWrapperService.post(`${Constants.BOOKING}/id/${Constants.BOOKING_ACTION[action]}`)
+        .then(booking => resolve(booking))
         .catch(error => reject(error));
     });
   }

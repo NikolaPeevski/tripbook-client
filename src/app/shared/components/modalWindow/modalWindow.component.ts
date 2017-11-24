@@ -49,6 +49,8 @@ export class modalWindowComponent {
 
   local_id: any;
 
+  trip_id: any;
+
   constructor(private dialogRef: MatDialogRef<modalWindowComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private _formBuilder: FormBuilder,
@@ -67,6 +69,7 @@ export class modalWindowComponent {
                 this.type = this.data.type || 'apply';
                 this.selectedCity = this.data.cityName || '';
                 this.local_id = this.data.local_id || '';
+                this.trip_id = this.data.trip_id || '';
                 console.log(this.data);
               }
 
@@ -134,10 +137,18 @@ checkedValue(value: any) {
 
  createATrip(): void {
    this._TripsService.createTrip({'title': this.firstFormGroup['_value'].title, 'description': this.secondFormGroup['_value'].description, 'numberOfPeople': this.numberOfPeople})
-     .then(trip => {})
+     .then(trip => console.log(trip))
      .catch(error => console.error(error))
      .finally(() => this.dialogRef.close());
  }
+
+ bookATrip(): void {
+   this._TripsService.bookATrip(this.forthFormGroup['_value'].from, this.forthFormGroup['_value'].to, this.numberOfPeople, this.trip_id)
+     .then(booking => console.log(booking))
+     .catch(error => console.error(error))
+     .finally(() => this.dialogRef.close());
+ }
+
 
  requestATrip(): void {
    this._AreaService.searchAreas(this.selectedCity, true)
