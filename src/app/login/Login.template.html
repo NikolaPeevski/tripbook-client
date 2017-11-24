@@ -7,21 +7,12 @@
         <mat-card-content >
           <form class="example-form" fxLayout="column">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="First name" required [formControl]="firstNameFormControl">
-              <mat-error *ngIf="firstNameFormControl.hasError('required')">
+              <input matInput placeholder="First name" required [formControl]="nameFormControl">
+              <mat-error *ngIf="nameFormControl.hasError('required')">
                 This field is required
               </mat-error>
-              <mat-error *ngIf="firstNameFormControl.hasError('pattern')">
-                Please enter a valid first name
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Last Name" required [formControl]="lastNameFormControl">
-              <mat-error *ngIf="lastNameFormControl.hasError('required')">
-                This field is required
-              </mat-error>
-              <mat-error *ngIf="lastNameFormControl.hasError('pattern')">
-                Please enter a valid last name
+              <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                Please enter a valid name
               </mat-error>
             </mat-form-field>
             <mat-form-field>

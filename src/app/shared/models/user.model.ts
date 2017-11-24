@@ -9,6 +9,7 @@ export interface User {
   gender: string,
   active: string,
   created_at: string,
-  updated_at: string
+  updated_at: string,
+  has_local: string
 
 }

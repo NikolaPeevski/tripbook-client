@@ -20,8 +20,9 @@ export class UserService {
   user:User;
 
   defineUser(data: any): void {
+    console.log(data);
     this.user = {
-    'id': data.id,
+    'id': data.id || '',
     'local_id': data.local_id || '',
     'name': data.name || '',
     'lastname': data.lastname  || '',
@@ -31,7 +32,8 @@ export class UserService {
     'gender': data.gender || '',
     'active': data.active || '',
     'created_at': data.created_at || '',
-    'updated_at': data.updated_at || ''
+    'updated_at': data.updated_at || '',
+    'has_local': data.has_local
     };
     // Notifies whoever's interested.
     this.userHolder.next(this.user);
@@ -45,8 +47,8 @@ export class UserService {
   updateUserByProperty(property: string, value: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.user[property] === undefined) {
-        reject();
-        return;
+
+        return reject();
       }
       this.user[property] = value;
       const payload = {'user': this.user };
@@ -75,9 +77,10 @@ export class UserService {
           'gender': response.gender || '',
           'active': response.active || '',
           'created_at': response.created_at || '',
-          'updated_at': response.updated_at || ''
+          'updated_at': response.updated_at || '',
+          'has_local': response.has_local
           };
-          resolve(user);
+          return resolve(user);
         }).catch(error => reject(error));
     });
   }
@@ -88,7 +91,7 @@ export class UserService {
 
       this._httpWrapperService.get(`${Constants.USERS}?query=${keyword}`)
         .then(response => {
-          resolve(response.users.map(el => ({
+          return resolve(response.users.map(el => ({
             'id': el.id,
             'local_id': el.local_id || '',
             'name': el.name || '',
@@ -106,4 +109,7 @@ export class UserService {
     });
   }
 
+isGuest(): boolean {
+  return (!this.user || !this.user.email || this.user.email === '')
+  }
 }

@@ -28,7 +28,7 @@ export class AreaService {
           country: response.country,
           cities: ''
         };
-        resolve(city);
+        return resolve(city);
       }).catch(error => reject(error));
     });
   }
@@ -47,16 +47,16 @@ export class AreaService {
           cities: response.cities,
           country: ''
         };
-        resolve(city);
+        return resolve(city);
       }).catch(error => reject(error));
     });
   }
 
-  searchAreas(keyword: string): Promise<any> {
+  searchAreas(keyword: string, onlyCities: boolean = false): Promise<any> {
     return new Promise((resolve, reject) => {
       if (!keyword) return reject();
 
-      this._httpWrapperService.get(`${Constants.AREAS.AREAS}/${keyword}`)
+      this._httpWrapperService.get(`${Constants.AREAS.AREAS}/${keyword}${onlyCities ? '?only=cities' : ''}`)
       .then(response => {
         let results: Area[] = response.map(el => {
           const Area: Area = {
@@ -65,11 +65,11 @@ export class AreaService {
             type: el.type,
             url: el.url,
             cities: el.cities || '',
-            country: el.country || ''
+            country: el.parent_area || ''
           };
           return Area;
         });
-        resolve (results);
+        return resolve (results);
       })
       .catch(error => reject(error));
     });

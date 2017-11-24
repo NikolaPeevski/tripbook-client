@@ -1,0 +1,9 @@
+<div id="trips">
+  <div *ngIf="currentTrips">
+  <h1>
+    Your trips
+  </h1>
+  <Card *ngFor="let trip of currentTrips" (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
+</div>
+  <button (click)="createTripOffer()" mat-button color="primary">Create a trip</button>
+</div>

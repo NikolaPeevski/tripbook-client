@@ -12,10 +12,12 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+//Modules
+import { ComponentsModule } from './shared/components';
+
 //Component dependencies
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './layout/TopBar.component';
-
 //Module providers
 import { Angular2TokenService } from 'angular2-token';
 import { JWTHandlerService } from './shared/JWTHandler.service';
@@ -27,6 +29,8 @@ import { LocalsService } from './shared/Locals.service';
 import { AreaService } from './shared/Area.service';
 import { TripsService } from './shared/Trips.service';
 import { ReviewService } from './shared/Review.service';
+import { SearchService } from './shared/Search.service';
+import { ModalWindowService } from './shared/modalWindow.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,7 @@ import { ReviewService } from './shared/Review.service';
     CustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
   providers: [
@@ -54,7 +59,9 @@ import { ReviewService } from './shared/Review.service';
     LocalsService,
     AreaService,
     TripsService,
-    ReviewService
+    ReviewService,
+    SearchService,
+    ModalWindowService
   ],
   bootstrap: [AppComponent]
 })

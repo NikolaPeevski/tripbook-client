@@ -14,25 +14,25 @@ export class LoginService {
                private _ParamsService: ParamsService,
                private _UserService: UserService) {}
 
-  signUp (first_name: string, last_name: string, email: string, password: string) {
+  signUp (name: string, email: string, password: string): Promise<any> {
     return new Promise<any>((resolve,reject) => {
 
-      if (!first_name || !last_name || !email || !password) {
+      if (!name || !email || !password) {
         reject();
         return;
       }
 
-      this._JWTHandlerService.signUp(first_name, last_name, email, password)
+      this._JWTHandlerService.signUp(name, email, password)
         .then(response => {
 
           this._UserService.defineUser(response.data);
           this._Router.navigateByUrl('/');
-          resolve();
+          return resolve();
         }).catch(error => reject(error));
     });
   }
 
-  signIn (email: string, password:string) {
+  signIn (email: string, password:string): Promise<any> {
     return new Promise<any>((resolve,reject) => {
       if (!email || !password) {
         reject();
@@ -43,8 +43,8 @@ export class LoginService {
 
           this._UserService.defineUser(response.data);
           this._Router.navigateByUrl('/');
-          
-          resolve();
+
+          return resolve();
         }).catch(error => reject(error));
     });
   }

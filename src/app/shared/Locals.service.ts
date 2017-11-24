@@ -14,19 +14,16 @@ export class LocalsService {
 
   constructor (private _httpWrapperService: httpWrapperService) {}
 
-  createLocal(country_id, city_id, description:string = '', quote:string = '', available: any = '', available_from = '', available_to = ''): Promise<any> {
+  createLocal(city_id: string, description:string = '', quote:string = '', available: boolean = true): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      if (!country_id || !city_id) return reject();
+      if (!city_id) return reject();
 
       const payload = {
         local: {
           description,
           quote,
           available,
-          available_from,
-          available_to,
-          country_id,
           city_id
         }
       }
@@ -46,10 +43,7 @@ export class LocalsService {
           let local: Local = {
             id: response.id,
             available: response.available || false,
-            available_from: response.available_from || '',
-            available_to: response.available_to || '',
             city_id: response.city_id,
-            country_id: response.country_id,
             description: response.description || '',
             quote: response.quote || '',
             user: {
@@ -63,18 +57,19 @@ export class LocalsService {
               'gender': response.user.gender || '',
               'active': response.user.active || '',
               'created_at': response.user.created_at || '',
-              'updated_at': response.user.updated_at || ''
+              'updated_at': response.user.updated_at || '',
+              'has_local': response.user.has_local || ''
             }
           };
-          resolve(local);
+          return resolve(local);
         }).catch(error => reject(error));
     });
   }
 
-  getLocals(): Promise<any> {
+  getLocals(pageId: number = 1, sorting?: string): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      this._httpWrapperService.get(`${Constants.LOCALS}`)
+      this._httpWrapperService.get(`${Constants.LOCALS}?page=${pageId}${sorting ? '&sort=' + sorting : ''}`)
       .then(response => resolve(response))
       .catch(error => reject(error));
     });
@@ -101,20 +96,17 @@ export class LocalsService {
     });
   }
 
-  searchLocals(keyword: string, country_id?: string, city_id?: string): Promise<any> {
+  searchLocals(keyword?: string, country_id?: string, city_id?: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!keyword) return reject();
 
-      this._httpWrapperService.get(`${Constants.LOCALS}?query=${keyword}${country_id ? '&country_id=' + country_id : ''}${city_id ? '&city_id=' + city_id : ''}`)
-        .then(response =>
-          resolve(response.locals.map(el => {
-            return {
+      this._httpWrapperService.get(`${Constants.LOCALS}?${keyword ? 'query=' + keyword + '&' : ''}${country_id ? 'country_id=' + country_id + '&' : ''}${city_id ? 'city_id=' + city_id  + '&': ''}`)
+      .then(response => {
+
+          let results = <any>response.locals.map(el => {
+            let local: Local = {
               id: el.id,
               available: el.available || false,
-              available_from: el.available_from || '',
-              available_to: el.available_to || '',
               city_id: el.city_id,
-              country_id: el.country_id,
               description: el.description || '',
               quote: el.quote || '',
               user: {
@@ -128,10 +120,15 @@ export class LocalsService {
                 'gender': el.user.gender || '',
                 'active': el.user.active || '',
                 'created_at': el.user.created_at || '',
-                'updated_at': el.user.updated_at || ''
+                'updated_at': el.user.updated_at || '',
+                'has_local': response.has_local || ''
               }
             }
-          }))).catch(error => reject(error));
+            return local;
+          });
+          
+          return resolve(results);
+        }).catch(error => reject(error));
     });
   }
 

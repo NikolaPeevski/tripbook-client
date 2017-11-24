@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 
 
 @Component({
@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 
 export class SearchResultComponent {
+
+  @Input() result: any;
 
   constructor () {}
 }

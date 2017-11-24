@@ -17,7 +17,26 @@ export const ROUTES: Routes = [
       loadChildren: './home#HomeModule'
     },
     {
-      path: 'search',
+      path: 'search/:term',
       loadChildren: './search#SearchModule'
+    },
+    {
+      path: 'user/:userId',
+      loadChildren: './user#UserModule'
+    },
+    {
+        path: 'locals',
+        loadChildren: './locals#LocalsModule'
+    },
+    {
+        path: 'trips',
+        loadChildren: './trips#TripsModule'
+    },
+    {
+        path: 'trip/:tripId',
+        loadChildren: './trip#TripModule'
     }
+
+
+
 ]

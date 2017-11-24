@@ -1,0 +1,6 @@
+<div id="trip">
+  <button *ngIf="trip && user && trip.user.id !== user.id" (click)="bookTrip()" mat-button color="primary">Make a booking!</button>
+  <pre *ngIf="trip">
+    {{ trip | json }}
+  </pre>
+</div>

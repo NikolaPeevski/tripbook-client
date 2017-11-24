@@ -18,8 +18,7 @@ export class LoginComponent {
   PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
   emailFormControl = new FormControl('', [Validators.required, Validators.pattern(this.EMAIL_REGEX)]);
-  firstNameFormControl = new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]);
-  lastNameFormControl = new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]);
+  nameFormControl = new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]);
 
   //false - singIn; true - signUp
@@ -33,7 +32,7 @@ export class LoginComponent {
 
   signUp(): void {
 
-    this._LoginService.signUp(this.firstNameFormControl.value, this.lastNameFormControl.value, this.emailFormControl.value, this.passwordFormControl.value)
+    this._LoginService.signUp(this.nameFormControl.value, this.emailFormControl.value, this.passwordFormControl.value)
       .then(status => {})
       .catch(error => console.error(error));
   }
@@ -44,5 +43,5 @@ export class LoginComponent {
       .then(status => {})
       .catch(error => console.error(error));
   }
-  
+
 }
