@@ -1,6 +1,6 @@
 <div id="topBar" *ngIf="params && params.currentModule !== 'login'">
 
-  <div class="topBarBG" *ngIf="params && params.currentModule === 'home'"></div>
+  <div class="topBarBG" *ngIf="params && (params.currentModule === 'home' || params.currentModule === 'locals' || params.currentModule === 'search')"></div>
   <div class="topBarContent">
     <mat-progress-spinner *ngIf="!params" mode="indeterminate" color="primary" fxLayoutAlign="center center">
     </mat-progress-spinner>
@@ -45,6 +45,11 @@
         <p>Experience the city through the eyes of a local & share it with others.</p>
       </div>
       <div class="search" id="SearchBar">
+
+          <div class="searchResultsHeader" *ngIf="params && (params.currentModule === 'locals' || params.currentModule === 'search')">
+            Search Results
+          </div>
+
         <form>
           <i class="search-icon material-icons">search</i>
           <input matInput placeholder="Where to next?" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" [formControl]="searchFormContol">
