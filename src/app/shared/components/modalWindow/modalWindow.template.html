@@ -304,8 +304,10 @@
     Error!
   </h1>
   <div matDialogContent>
-      <div *ngFor="let the_value of error">
-          {{ the_value }}
-      </div>
+    <ul>
+      <li *ngFor="let the_value of error">
+        {{ the_value }}
+      </li>
+    </ul>
   </div>
 </div>

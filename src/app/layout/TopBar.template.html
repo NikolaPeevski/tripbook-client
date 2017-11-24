@@ -1,65 +1,88 @@
 <div id="topBar" *ngIf="params && params.currentModule !== 'login'">
-  <mat-progress-spinner *ngIf="!params" mode="indeterminate" color="primary" fxLayoutAlign="center center">
-   </mat-progress-spinner>
-  <div class="navigation" *ngIf="params">
-    <a class="clicky" (click)="navigateTo('home')"> <img src="assets/logo_symbol.svg"/></a> <!-- Make clicky work-->
-    <button *ngIf="params && params.currentModule === 'home'" class="menu-button" mat-raised-button color="primary" (click)="navigateTo('home')">Home</button>
-    <button *ngIf="params && params.currentModule !== 'home'" class="menu-button" mat-button color="primary" (click)="navigateTo('home')">Home</button>
-    <button *ngIf="params && params.currentModule === 'trips'" class="menu-button" mat-raised-button color="primary" [matMenuTriggerFor]="trip_menu">Trips</button>
-    <button *ngIf="params && params.currentModule !== 'trips'" class="menu-button" mat-button color="primary" [matMenuTriggerFor]="trip_menu">Trips</button>
-    <mat-menu #trip_menu="matMenu">
-      <!-- Weird right -->
-      <button mat-menu-item *ngIf="user" (click)="navigateTo('trips/my')">{{ user.has_local ? 'My Trips/Bookings' : 'My Bookins'}}</button>
-      <button mat-menu-item (click)="navigateTo('trips/rated')">Best Rated Trips</button>
-      <button mat-menu-item (click)="navigateTo('trips/popular')">Popular Trips</button>
-    </mat-menu>
-    <button *ngIf="params && params.currentModule === 'locals'" class="menu-button" mat-raised-button color="primary" (click)="navigateTo('locals')">Locals</button>
-    <button *ngIf="params && params.currentModule !== 'locals'" class="menu-button" mat-button color="primary" (click)="navigateTo('locals')">Locals</button>
-    <!-- Because currently conditional directives arent supported. -->
 
-    <button *ngIf="!user" class="menu-button" mat-raised-button color="accent" (click)="navigateTo('login')">Login</button>
-    <button *ngIf="user" class="menu-button" mat-raised-button color="accent" [matMenuTriggerFor]="profile_menu" >My profile</button>
+  <div class="topBarBG" *ngIf="params && params.currentModule === 'home'"></div>
+  <div class="topBarContent">
+    <mat-progress-spinner *ngIf="!params" mode="indeterminate" color="primary" fxLayoutAlign="center center">
+    </mat-progress-spinner>
+    
+    <!-- START: Navigation -->
+    <div class="navigation" *ngIf="params">
+      <a class="clicky logo" (click)="navigateTo('home')">
+          <img src="assets/logo_symbol_white.svg" srcset="assets/logo_symbol_white.svg"/>
+        </a> <!-- Make clicky work-->
+      <div class="nav-buttons">
 
-    <mat-menu #profile_menu="matMenu">
-      <button mat-menu-item  (click)="goToProfilePage()">My profile</button>
-      <button mat-menu-item  (click)="logout()">Logout</button>
-    </mat-menu>
+          <button [ngClass]="{'menu-button': true, 'active': params && params.currentModule === 'home'}"
+          mat-button (click)="navigateTo('home')">Home</button>
+          <button [ngClass]="{'menu-button': true, 'active': params && params.currentModule === 'trips'}"
+          mat-button [matMenuTriggerFor]="trip_menu">Trips</button>
+          <mat-menu #trip_menu="matMenu">
+            <!-- Weird right -->
+            <button mat-menu-item *ngIf="user" (click)="navigateTo('trips/my')">{{ user.has_local ? 'My Trips/Bookings' : 'My Bookins'}}</button>
+            <button mat-menu-item (click)="navigateTo('trips/rated')">Best Rated Trips</button>
+            <button mat-menu-item (click)="navigateTo('trips/popular')">Popular Trips</button>
+          </mat-menu>
+          <button [ngClass]="{'menu-button': true, 'active': params && params.currentModule === 'locals'}"
+          mat-button (click)="navigateTo('locals')">Locals</button>
+          <!-- Because currently conditional directives arent supported. -->
+          <button *ngIf="!user" class="menu-button profile-button" mat-raised-button color="accent" (click)="navigateTo('login')">Login</button>
+          <button *ngIf="user" class="menu-button profile-button" mat-raised-button color="accent" [matMenuTriggerFor]="profile_menu" >My profile</button>
+      
+          <mat-menu #profile_menu="matMenu">
+            <button mat-menu-item  (click)="goToProfilePage()">My profile</button>
+            <button mat-menu-item  (click)="logout()">Logout</button>
+          </mat-menu>
+    
+      </div>
+    </div>
+    <!-- END: Navigation -->
 
-    <button class="menu-button" mat-raised-button color="accent" (click)="updateUser()">arg</button>
-  </div>
-  <div class="search">
-    <form class="example-form" fxLayoutAlign="center center">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Search" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" [formControl]="searchFormContol">
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-          <mat-option *ngFor="let item of autocomplete" [value]="item.name">
-            <span>{{ item.name }}</span>
-          </mat-option>
-        </mat-autocomplete>
-        <mat-error *ngIf="searchFormContol.hasError('pattern')">
-          Please enter a valid search word.
-        </mat-error>
-      </mat-form-field>
-    </form>
-  </div>
-  <div class="searchTabs" *ngIf="params && params.currentModule === 'search'" fxLayoutAlign="center center">
-    <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user && isOwnCity">
-      <mat-tab label="Locals" ></mat-tab>
-      <mat-tab label="Reviews" ></mat-tab>
-      <mat-tab label="Trips" ></mat-tab>
-      <mat-tab label="Requested trips"></mat-tab>
-    </mat-tab-group>
-    <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user && !isOwnCity">
-      <mat-tab label="Locals" ></mat-tab>
-      <mat-tab label="Reviews" ></mat-tab>
-      <mat-tab label="Trips" ></mat-tab>
-    </mat-tab-group>
-    <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1) && !user">
-      <mat-tab label="Locals" ></mat-tab>
-      <mat-tab label="Reviews" ></mat-tab>
-    </mat-tab-group>
-    <mat-tab-group *ngIf="params.path.indexOf('cities') !== -1">
-      <mat-tab label="locations"></mat-tab>
-    </mat-tab-group>
+    <div class="container">
+
+      <!-- START: Home text -->
+      <div class="homeText" *ngIf="params && params.currentModule === 'home'">
+        <h1>Tripbook</h1>
+        <p>Experience the city through the eyes of a local & share it with others.</p>
+      </div>
+      <div class="search" id="SearchBar">
+        <form>
+          <i class="search-icon material-icons">search</i>
+          <input matInput placeholder="Where to next?" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" [formControl]="searchFormContol">
+          
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+            <mat-option *ngFor="let item of autocomplete" [value]="item.name">
+              <span>{{ item.name }}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </form>
+      </div>
+      <!-- END: Home text -->
+
+      <!-- START: Search tabs -->
+      <div class="searchTabs" *ngIf="params && params.currentModule === 'search'" fxLayoutAlign="center center">
+        <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user && isOwnCity">
+          <mat-tab label="Locals" ></mat-tab>
+          <mat-tab label="Reviews" ></mat-tab>
+          <mat-tab label="Trips" ></mat-tab>
+          <mat-tab label="Requested trips"></mat-tab>
+        </mat-tab-group>
+        <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1)  && user && !isOwnCity">
+          <mat-tab label="Locals" ></mat-tab>
+          <mat-tab label="Reviews" ></mat-tab>
+          <mat-tab label="Trips" ></mat-tab>
+        </mat-tab-group>
+        <mat-tab-group (selectedTabChange)="navigateSearchTab($event)" [selectedIndex]="selectedTab" *ngIf="(params.path.indexOf('cities') === -1) && !user">
+          <mat-tab label="Locals" ></mat-tab>
+          <mat-tab label="Reviews" ></mat-tab>
+        </mat-tab-group>
+        <mat-tab-group *ngIf="params.path.indexOf('cities') !== -1">
+          <mat-tab label="locations"></mat-tab>
+        </mat-tab-group>
+      </div>
+      <!-- END: Search tabs -->
+
+    </div>
+
+    
   </div>
 </div>

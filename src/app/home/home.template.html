@@ -1,5 +1,4 @@
-<div id="home">
-  <h1>Home page</h1>
+<div id="home" class="container">
   <div class='locals' *ngIf='locals'>
     <h2> Best Rated Locals</h2>
     <Card *ngFor="let local of locals" [data]="local" [size]="size"  [type]="'local'" (clickEmitter)="goToProfilePage($event)" fxLayoutAlign="center center"></Card>
