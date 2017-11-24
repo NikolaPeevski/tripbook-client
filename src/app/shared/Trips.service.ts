@@ -134,7 +134,7 @@ export class TripsService {
     return new Promise((resolve, reject) => {
       if (!id || !action) reject();
 
-      this._httpWrapperService.post(`${Constants.BOOKING}/id/${Constants.BOOKING_ACTION[action]}`)
+      this._httpWrapperService.post(`${Constants.BOOKING}/${id}/${Constants.BOOKING_ACTION[action]}`)
         .then(booking => resolve(booking))
         .catch(error => reject(error));
     });

@@ -19,6 +19,12 @@ export class Constants {
   public static BOOKING = 'bookings';
   public static BOOKING_ACTION = {
       'ACCEPT': 'accept',
-      'DENY': 'deny'
+      'DENY': 'cancel'
+  }
+  public static BOOKING_STATUS = {
+    'Cancelled': 0,
+    'Pending': 1,
+    'Upcoming': 2,
+    'Completed': 2
   }
 }
