@@ -6,7 +6,7 @@
     </mat-progress-spinner>
     
     <!-- START: Navigation -->
-    <div class="navigation" *ngIf="params">
+    <div class="navigation container" *ngIf="params">
       <a class="clicky logo" (click)="navigateTo('home')">
           <img src="assets/logo_symbol_white.svg" srcset="assets/logo_symbol_white.svg"/>
         </a> <!-- Make clicky work-->
@@ -37,29 +37,31 @@
     </div>
     <!-- END: Navigation -->
 
-    <div class="container">
+    <div>
 
       <!-- START: Home text -->
-      <div class="homeText" *ngIf="params && params.currentModule === 'home'">
-        <h1>Tripbook</h1>
-        <p>Experience the city through the eyes of a local & share it with others.</p>
-      </div>
-      <div class="search" id="SearchBar">
+      <div class="container">
+        <div class="homeText" *ngIf="params && params.currentModule === 'home'">
+          <h1>Tripbook</h1>
+          <p>Experience the city through the eyes of a local & share it with others.</p>
+        </div>
+        <div class="search" id="SearchBar">
 
-          <div class="searchResultsHeader" *ngIf="params && (params.currentModule === 'locals' || params.currentModule === 'search')">
-            Search Results
-          </div>
+            <div class="searchResultsHeader" *ngIf="params && (params.currentModule === 'locals' || params.currentModule === 'search')">
+              Search Results
+            </div>
 
-        <form>
-          <i class="search-icon material-icons">search</i>
-          <input matInput placeholder="Where to next?" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" [formControl]="searchFormContol">
-          
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-            <mat-option *ngFor="let item of autocomplete" [value]="item.name">
-              <span>{{ item.name }}</span>
-            </mat-option>
-          </mat-autocomplete>
-        </form>
+          <form>
+            <i class="search-icon material-icons">search</i>
+            <input matInput placeholder="Where to next?" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" [formControl]="searchFormContol">
+            
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+              <mat-option *ngFor="let item of autocomplete" [value]="item.name">
+                <span>{{ item.name }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </form>
+        </div>
       </div>
       <!-- END: Home text -->
 
