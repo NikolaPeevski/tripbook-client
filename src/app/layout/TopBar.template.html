@@ -1,4 +1,4 @@
-<div id="topBar">
+<div id="topBar" *ngIf="params && params.currentModule !== 'login'">
   <mat-progress-spinner *ngIf="!params" mode="indeterminate" color="primary" fxLayoutAlign="center center">
    </mat-progress-spinner>
   <div class="navigation" *ngIf="params">

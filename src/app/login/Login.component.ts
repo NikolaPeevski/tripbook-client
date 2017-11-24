@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 
 import { LoginService } from './Login.service';
+import { ParamsService } from '../shared/params.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -24,7 +26,10 @@ export class LoginComponent {
   //false - singIn; true - signUp
   viewState: boolean = false;
 
-  constructor (private _LoginService: LoginService){}
+  constructor (private _LoginService: LoginService, 
+               private _Router: Router,
+               private _ParamsService: ParamsService
+              ){}
 
   switchState(): void {
     this.viewState = !this.viewState;
@@ -44,4 +49,13 @@ export class LoginComponent {
       .catch(error => console.error(error));
   }
 
+  goBack(): void {
+
+    let previousModule = this._ParamsService.previousParams && this._ParamsService.previousParams['currentModule']  ? this._ParamsService.previousParams['currentModule'] : 'home';
+
+    this._Router.navigateByUrl(`${previousModule}`)
+  }
+
 }
+
+

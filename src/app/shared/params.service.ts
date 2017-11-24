@@ -24,7 +24,7 @@ export class ParamsService {
           this.previousParams = this.params;
         //console.log(event);
         this.params = this.mapParamsFromUrl(event['urlAfterRedirects'] || event['url'] || this._Router.url);
-        console.log(this.params);
+        console.log(this.previousParams, this.params);
         this.paramsSub.next(this.params);
 
         }
