@@ -11,7 +11,7 @@ import { User } from './models/user.model';
 @Injectable()
 export class UserService {
 
-  private userHolder = new BehaviorSubject<any>({});
+  private userHolder = new BehaviorSubject<any>(undefined);
 
   public currentUser = this.userHolder.asObservable();
 
