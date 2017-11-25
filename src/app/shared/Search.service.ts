@@ -64,14 +64,14 @@ export class SearchService {
       if (tab === 'reviews')
           setTimeout(() => {
             this._ReviewsService.getReview('city', id)
-            .then(results => resolve(results))
+            .then(results => resolve(results.reviews))
             .catch(error => reject(error));
           }, 50);
 
     if (tab === 'trips')
         setTimeout(() => {
           this._TripsService.getTripsByCity(id)
-          .then(results => resolve(results))
+          .then(results => resolve(results.trips))
           .catch(error => reject(error));
         }, 50);
 

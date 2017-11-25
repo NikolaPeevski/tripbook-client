@@ -1,6 +1,17 @@
 <div id="trip">
-  <button *ngIf="trip && user && trip.user.id !== user.id" (click)="bookTrip()" mat-button color="primary">Make a booking!</button>
-  <pre *ngIf="trip">
-    {{ trip | json }}
-  </pre>
+  <mat-tab-group (selectedTabChange)="changeTab($event.tab.textLabel)">
+    <mat-tab label="Details"></mat-tab>
+    <mat-tab label="Reviews"></mat-tab>
+  </mat-tab-group>
+
+  <div class="details" *ngIf="tab === 'Details'">
+    <button *ngIf="trip && user && trip.user.id !== user.id" (click)="bookTrip()" mat-button color="primary">Make a booking!</button>
+    <pre *ngIf="trip">
+      {{ trip | json }}
+    </pre>
+  </div>
+  <div class="reviews" *ngIf="tab === 'Reviews' && reviews">
+    <button *ngIf="user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+    <Card *ngFor="let review of reviews" [type]="'review'" [data]="review"></Card>
+  </div>
 </div>

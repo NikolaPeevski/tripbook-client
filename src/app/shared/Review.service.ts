@@ -13,9 +13,8 @@ export class ReviewService {
 
   constructor (private _httpWrapperService: httpWrapperService) {}
 
-  createReview(review : { text: string, rating: number, id: string, review_type: string }): Promise<any> {
+  createReview(review : { text: string, rating: string, id: string, review_type: string }): Promise<any> {
     return new Promise((resolve, reject) => {
-
       const payload = {
         text: review.text,
         stars: review.rating
@@ -32,7 +31,7 @@ export class ReviewService {
     return new Promise((resolve, reject) => {
       //Add pagination handling.
       this._httpWrapperService.get(`${Constants.REVIEW}/${review_type}/${id}`)
-        .then(response => resolve(response.reviews))
+        .then(response => resolve(response))
         .catch(error => reject(error));
     });
   }

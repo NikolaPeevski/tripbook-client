@@ -7,7 +7,7 @@ import { LocalsService } from '../shared/Locals.service';
 
 @Component({
   selector: 'home',
-  templateUrl: './Home.template.html',
+  templateUrl: './home.template.html',
   styleUrls: ['./home.scss']
 })
 
@@ -37,5 +37,9 @@ export class HomeComponent implements OnInit {
 
   goToProfilePage(id: string): void {
     this._Router.navigateByUrl(`user/${id}`);
+  }
+
+  goToTripPage(id: string): void {
+    this._Router.navigateByUrl(`trip/${id}`);
   }
 }

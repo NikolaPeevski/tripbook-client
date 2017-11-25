@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CustomMaterialModule } from '../shared/material.module';
+import { ComponentsModule } from '../shared/components/';
 
 import { UserComponent } from './User.component';
 
@@ -24,6 +25,7 @@ export const routes = [
     ReactiveFormsModule,
     CustomMaterialModule,
     FlexLayoutModule,
+    ComponentsModule,
     RouterModule.forChild(routes),
   ],
 })

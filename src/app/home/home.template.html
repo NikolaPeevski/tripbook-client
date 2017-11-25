@@ -3,4 +3,8 @@
     <h2> Best Rated Locals</h2>
     <Card *ngFor="let local of locals" [data]="local" [size]="size"  [type]="'local'" (clickEmitter)="goToProfilePage($event)" fxLayoutAlign="center center"></Card>
   </div>
+  <div class='locals' *ngIf='locals'>
+    <h2> Popular trips</h2>
+    <Card *ngFor="let trip of trips" [data]="trip" [size]="size"  [type]="'trip-offer'" (clickEmitter)="goToTripPage($event)" fxLayoutAlign="center center"></Card>
+  </div>
 </div>

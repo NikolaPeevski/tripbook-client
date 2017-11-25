@@ -12,6 +12,7 @@ import { AreaService } from '../../Area.service';
 import { LocalsService } from '../../Locals.service';
 import { UserService } from '../../User.service';
 import { TripsService } from '../../Trips.service';
+import { ReviewService } from '../../Review.service';
 
 
 @Component({
@@ -59,7 +60,8 @@ export class modalWindowComponent {
               private _AreaService: AreaService,
               private _LocalsService: LocalsService,
               private _UserService: UserService,
-              private _TripsService: TripsService) {
+              private _TripsService: TripsService,
+              private _ReviewService: ReviewService) {
                 this.searchSub = this.keyUp
                 .map(event => event['target'].value)
                 .debounceTime(250)
@@ -73,7 +75,6 @@ export class modalWindowComponent {
                 this.local_id = this.data.local_id || '';
                 this.trip_id = this.data.trip_id || '';
                 this.error = this.data.error || '';
-                console.log(this.data);
               }
 
 
@@ -168,6 +169,26 @@ checkedValue(value: any) {
 
  selectNumberOfPeople(value: string): void {
    this.numberOfPeople = value;
+ }
+
+ postAReview(): void {
+   console.log({'text': this.secondFormGroup['_value'].description, 'rating': this.numberOfPeople, 'id': this.local_id ? this.local_id : this.trip_id, 'review_type': this.local_id ? 'local' : 'trip'}, this.selectCity);
+   if (this.selectedCity)
+   this._AreaService.searchAreas(this.selectedCity, true)
+    .then(city => {
+      setTimeout(() => {
+        this._ReviewService.createReview({'text': this.secondFormGroup['_value'].description, 'rating': this.numberOfPeople, 'id': city[0].id, 'review_type': 'city'})
+          .then(review => console.log(review))
+          .catch(error => console.error(error))
+          .finally(() => this.dialogRef.close());
+        }, 50);
+    }).catch(error => console.error(error));
+    else
+      this._ReviewService.createReview({'text': this.secondFormGroup['_value'].description, 'rating': this.numberOfPeople, 'id': this.local_id ? this.local_id : this.trip_id, 'review_type': this.local_id ? 'local' : 'trip'})
+        .then(review => console.log(review))
+        .catch(error => console.error(error))
+        .finally(() => this.dialogRef.close());
+
  }
 
   ngOnDestroy() {
