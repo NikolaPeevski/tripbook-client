@@ -59,9 +59,12 @@ export class LoginComponent {
   }
 
   // handles events on key press
-  keypressHandler(keyCode): void {
+  keypressHandler(keyCode, action): void {
     // if key press was ENTER, then run the sign in method
-    if (keyCode == 13) this.signIn();
+    if (keyCode == 13) {
+      if (action == "signin") this.signIn(); 
+      else if (action == "signup") this.signUp(); 
+    }
   }
 
 }

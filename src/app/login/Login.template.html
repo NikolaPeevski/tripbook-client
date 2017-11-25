@@ -18,11 +18,11 @@
               </ul>
             </div>
           </div>
-          <div class="authBlock" fxFlex="100%" fxFlex.gt-sm="60%" (keypress)="keypressHandler($event.keyCode)" >
+          <div class="authBlock" fxFlex="100%" fxFlex.gt-sm="60%">
             <div *ngIf="viewState">
               <mat-card-title>Sign up</mat-card-title>
               <mat-card-content >
-                <form class="example-form" fxLayout="column">
+                <form class="example-form" fxLayout="column" (keypress)="keypressHandler($event.keyCode, 'signup')">
                   <mat-form-field class="example-full-width">
                     <input matInput placeholder="First name" required [formControl]="nameFormControl">
                     <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -58,7 +58,7 @@
             <div *ngIf="!viewState">
               <mat-card-title>Sign in</mat-card-title>
               <mat-card-content>
-                <form class="example-form" fxLayout="column">
+                <form class="example-form" fxLayout="column" (keypress)="keypressHandler($event.keyCode, 'signin')">
                   <mat-form-field>
                     <input matInput placeholder="Email" [formControl]="emailFormControl" required>
                     <mat-error *ngIf="emailFormControl.hasError('required')">
