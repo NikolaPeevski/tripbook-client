@@ -7,7 +7,7 @@ import { LocalsService } from '../shared/Locals.service';
 
 @Component({
   selector: 'home',
-  templateUrl: './Home.template.html',
+  templateUrl: './home.template.html',
   styleUrls: ['./home.scss']
 })
 

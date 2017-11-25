@@ -17,7 +17,7 @@ import { LocalsService } from '../shared/Locals.service';
 
 @Component({
   selector: 'topBar',
-  templateUrl: './topBar.template.html',
+  templateUrl: './TopBar.template.html',
   styleUrls: ['../styles/topBar.styles.scss']
 })
 
