@@ -20,23 +20,24 @@ export class UserService {
   user:User;
 
   defineUser(data: any): void {
-    console.log(data);
-    this.user = {
-    'id': data.id || '',
-    'local_id': data.local_id || '',
-    'name': data.name || '',
-    'lastname': data.lastname  || '',
-    'email': data.email || '',
-    'age': data.age || '',
-    'birthday': data.birthday || '',
-    'gender': data.gender || '',
-    'active': data.active || '',
-    'created_at': data.created_at || '',
-    'updated_at': data.updated_at || '',
-    'has_local': data.has_local
-    };
+    if (data)
+      this.user = {
+      'id': data.id || '',
+      'local_id': data.local_id || '',
+      'name': data.name || '',
+      'lastname': data.lastname  || '',
+      'email': data.email || '',
+      'age': data.age || '',
+      'birthday': data.birthday || '',
+      'gender': data.gender || '',
+      'active': data.active || '',
+      'created_at': data.created_at || '',
+      'updated_at': data.updated_at || '',
+      'has_local': data.has_local
+      };
+    else this.user = undefined;
     // Notifies whoever's interested.
-    this.userHolder.next(this.user);
+    this.userHolder.next(this.user );
 
   }
 
