@@ -4,6 +4,7 @@ import { ParamsService } from '../shared/params.service';
 import { TripsService } from '../shared/Trips.service';
 import { UserService } from '../shared/User.service';
 import { ModalWindowService } from '../shared/modalWindow.service';
+import { ReviewService } from '../shared/Review.service';
 
 @Component({
   selector: `trip`,
@@ -20,10 +21,15 @@ export class TripComponent {
   id: any;
   trip: any;
 
+  tab: any = 'Details';
+
+  reviews: any = [];
+
   constructor(private _ParamsService: ParamsService,
               private _TripsService: TripsService,
               private _UserService: UserService,
-              private _ModalWindowService: ModalWindowService){
+              private _ModalWindowService: ModalWindowService,
+              private _ReviewService: ReviewService){
     this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
       if (params && params.currentModule === 'trip') {
           this.params = params;
@@ -43,6 +49,19 @@ export class TripComponent {
 
   bookTrip(): void {
     this._ModalWindowService.openModal('book-trip', null, null, this.trip.id)
+  }
+
+  changeTab($event): void {
+    this.tab = $event;
+
+    if ($event === 'Reviews')
+      this._ReviewService.getReview('trip', this.id)
+        .then(reviews => this.reviews = reviews.reviews)
+        .catch(error => console.error(error));
+  }
+
+  createReview(): void {
+    this._ModalWindowService.openModal('review', null, null, this.id);
   }
 
   ngOnDestroy() {

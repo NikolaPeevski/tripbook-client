@@ -42,7 +42,7 @@ export class TripsService {
   getTripsByCity(cityId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this._httpWrapperService.get(`${Constants.TRIPS}?city_id=${cityId}`)
-        .then(trips => resolve(trips.trips))
+        .then(trips => resolve(trips))
         .catch(error => reject(error));
     });
   }

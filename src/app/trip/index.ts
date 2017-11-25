@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomMaterialModule } from '../shared/material.module';
 
 import { TripComponent } from './Trip.component';
+import { ComponentsModule } from '../shared/components';
 
 export const routes = [
     { path: '', component: TripComponent, pathMatch: 'full'}
@@ -24,6 +25,7 @@ export const routes = [
     ReactiveFormsModule,
     CustomMaterialModule,
     FlexLayoutModule,
+    ComponentsModule,
     RouterModule.forChild(routes),
   ],
 })

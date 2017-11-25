@@ -104,12 +104,6 @@ export class TopBarComponent {
     this._Router.navigateByUrl(url);
   }
 
-  updateUser(): void {
-    this._ReviewService.createReview({text: 'review text', rating: 4, id: '1', review_type: 'local' })
-      .then(response => console.log(response))
-      .catch(error => console.error(error));
-  }
-
   logout(): void {
     this._JWTHandlerService.signOut()
       .then(() => this._Router.navigateByUrl('/'))

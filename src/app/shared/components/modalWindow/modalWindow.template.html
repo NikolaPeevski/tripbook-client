@@ -311,3 +311,44 @@
     </ul>
   </div>
 </div>
+<div id="review" *ngIf="type === 'review'">
+  <h1 matDialogTitle>
+    Write a review!
+  </h1>
+  <mat-horizontal-stepper [linear]="true">
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Rating</ng-template>
+        <mat-form-field>
+              <mat-select placeholder="Rating">
+                <mat-option *ngFor="let number of [1, 2, 3, 4, 5]" [value]="number" (click)="selectNumberOfPeople(number)" required>
+                  {{ number }}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Review description</ng-template>
+        <mat-form-field>
+              <input matInput placeholder="Review's description" formControlName="description" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button (click)="postAReview()">Close</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
