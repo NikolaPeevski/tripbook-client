@@ -18,7 +18,7 @@
               </ul>
             </div>
           </div>
-          <div class="authBlock" fxFlex="100%" fxFlex.gt-sm="60%" >
+          <div class="authBlock" fxFlex="100%" fxFlex.gt-sm="60%" (keypress)="keypressHandler($event.keyCode)" >
             <div *ngIf="viewState">
               <mat-card-title>Sign up</mat-card-title>
               <mat-card-content >
