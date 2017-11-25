@@ -38,6 +38,9 @@ export class TopBarComponent {
 
   selectedTab: any = 0;
 
+  // Variable for holding active search. AKA the city name
+  currentCity: any = "";
+
   constructor (private _Router: Router,
                private _ReviewService: ReviewService,
                private _UserService: UserService,
@@ -60,6 +63,12 @@ export class TopBarComponent {
 
                    if (this.params.currentModule === 'search') {
 
+                    // First we get the city object
+                    let cityObj = (this.params.path.split('/').pop()).split('?tab=');
+                    // get the name of the city, check if its an array and so
+                    this.currentCity = cityObj === null ? "" : ((cityObj instanceof Array) ? cityObj[0] : cityObj);
+                    // set the search value
+                    this.searchFormContol.setValue(this.currentCity);
 
                     if (this.params.path.indexOf('cities') === -1) {
                       let currentTab = decodeURIComponent((this.params.path.split('tab=')).pop());

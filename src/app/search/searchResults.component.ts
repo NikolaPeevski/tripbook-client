@@ -46,6 +46,7 @@ export class SearchResultsComponent {
       this.searchFor(searchPath[0], decodeURIComponent(searchPath[1]));
       this.currentCity = searchPath[0];
       }
+
     });
     this.userSub = this._UserService.currentUser.subscribe(user => {
       if (user)
