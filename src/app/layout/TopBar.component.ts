@@ -51,9 +51,9 @@ export class TopBarComponent {
                private _LocalsService: LocalsService) {
                  this.searchSub = this.keyUp
                  .map(event => event['target'].value)
-                 .debounceTime(250)
+                 .debounceTime(100)
                  .distinctUntilChanged()
-                 .flatMap(search => Observable.of(search).delay(250))
+                 .flatMap(search => Observable.of(search).delay(100))
                  .subscribe(this.onKeyUp.bind(this));
 
                  this.paramSub = this._ParamsService.paramsObs.subscribe(params => {
@@ -68,7 +68,7 @@ export class TopBarComponent {
                     // get the name of the city, check if its an array and so
                     this.currentCity = cityObj === null ? "" : ((cityObj instanceof Array) ? cityObj[0] : cityObj);
                     // set the search value
-                    this.searchFormContol.setValue(this.currentCity);
+                    this.searchFormContol.setValue(this.currentCity.replace(/(%20)/g, " "));
 
                     if (this.params.path.indexOf('cities') === -1) {
                       let currentTab = decodeURIComponent((this.params.path.split('tab=')).pop());
@@ -92,6 +92,8 @@ export class TopBarComponent {
                         }
                       }
                       this.checkForOwnCity();
+                    } else {
+                      this.searchFormContol.setValue("");
                     }
                  });
                  this.userSub = this._UserService.currentUser.subscribe(user => {
