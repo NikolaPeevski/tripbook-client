@@ -22,9 +22,14 @@ export class CardComponent {
 
   private city: string = '';
   trip:any;
+  totalTrips:any;
 
   userSub: any;
   user: any;
+
+  location: any;
+
+  reviewer: any;
 
   constructor (private _AreaService: AreaService,
                private _TripsService: TripsService,
@@ -33,8 +38,7 @@ export class CardComponent {
                this.userSub = this._UserService.currentUser.subscribe(user => {
                  if (user)
                   this.user = user;
-                  
-               });
+                });
 
   }
 
@@ -47,9 +51,23 @@ export class CardComponent {
         .catch(error => console.error(error));
 
       if (this.type === 'booking')
-      this._TripsService.getTrip(this.data.trip_id)
+      this._TripsService.getTrip(this.data.trip_id || this.data.id)
         .then(trip => this.trip = trip)
         .catch(error => console.error(error))
+      if (this.type === 'city')
+      this._AreaService.getCity(this.data)
+        .then(city => {
+          this.location = city;
+          setTimeout(() => {
+            this._TripsService.getTripsByCity(city.id)
+              .then(trips => this.totalTrips = trips.total)
+              .catch(error => console.error(error));
+          }, 50)
+        }).catch(error => console.error(error))
+      if (this.type === 'review')
+        this._UserService.getUserById(this.data.user_id)
+          .then(reviewer => this.reviewer = reviewer)
+          .catch(error => console.error(error));
     }
   }
 
@@ -59,8 +77,11 @@ export class CardComponent {
     if (this.type === 'trip-offer')
       this.clickEmitter.emit(this.data.id);
     if (this.type === 'booking') {
+      console.log($event);
       this.clickEmitter.emit($event);
     }
+    if (this.type === 'city')
+      this.clickEmitter.emit(this.location.name);
   }
 
   handleAction(actionType: string): void {

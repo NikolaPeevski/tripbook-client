@@ -17,7 +17,7 @@ import { LocalsService } from '../shared/Locals.service';
 
 @Component({
   selector: 'topBar',
-  templateUrl: './topBar.template.html',
+  templateUrl: './TopBar.template.html',
   styleUrls: ['../styles/topBar.styles.scss']
 })
 
@@ -111,12 +111,6 @@ export class TopBarComponent {
 
   navigateTo(url: string) {
     this._Router.navigateByUrl(url);
-  }
-
-  updateUser(): void {
-    this._ReviewService.createReview({text: 'review text', rating: 4, id: '1', review_type: 'local' })
-      .then(response => console.log(response))
-      .catch(error => console.error(error));
   }
 
   logout(): void {

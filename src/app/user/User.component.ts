@@ -4,6 +4,7 @@ import { ParamsService } from '../shared/params.service';
 import { UserService } from '../shared/User.service';
 import { LocalsService } from '../shared/Locals.service';
 import { ModalWindowService } from '../shared/modalWindow.service';
+import { ReviewService } from '../shared/Review.service';
 
 
 @Component({
@@ -21,11 +22,19 @@ export class UserComponent {
   params:any;
 
   userSub: any;
+  externalUser: any;
+
+  tab: any = 'Details';
+
+  reviews: any = [];
+
 
   constructor (private _ParamsService: ParamsService,
                private _UserService: UserService,
                private _LocalService: LocalsService,
-               private _ModalWindowService: ModalWindowService) {
+               private _ModalWindowService: ModalWindowService,
+               private _ReviewService: ReviewService) {
+
     this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
       if (params && params.currentModule === 'user') {
         this.params = params;
@@ -43,11 +52,19 @@ export class UserComponent {
           }).catch(error => console.error(error));
         }
     });
+
+    this.userSub = this._UserService.currentUser.subscribe(user => {
+      if (user) {
+        this.externalUser = user;
+      }
+    })
   }
 
   ngOnDestroy() {
     if (this.paramsSub)
       this.paramsSub.unsubscribe();
+    if (this.userSub)
+      this.userSub.unsubscribe();
   }
 
   localApply(): void {
@@ -56,5 +73,18 @@ export class UserComponent {
 
   bookATrip(): void {
     this._ModalWindowService.openModal('book', null, this.user.id);
+  }
+
+  changeTab($event): void {
+    this.tab = $event;
+
+    if ($event === 'Reviews')
+      this._ReviewService.getReview('local', this.user.id)
+        .then(reviews => this.reviews = reviews.reviews)
+        .catch(error => console.error(error));
+  }
+
+  createReview(): void {
+    this._ModalWindowService.openModal('review', null, this.user.id);
   }
 }

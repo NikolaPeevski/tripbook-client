@@ -23,6 +23,15 @@
       <!-- List the results -->
       <Card *ngFor="let trip of searchResults" (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
     </div>
-
+    <div class="trip" *ngIf="type === 'cities'">
+      <Card *ngFor="let city of searchResults" (clickEmitter)="searchForCity($event)" [type]="tripsType[2]" [data]="city"></Card>
+    </div>
+    <div class="trip" *ngIf="type === 'reviews'">
+      <button *ngIf="user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+      <Card *ngFor="let trip of searchResults" [type]="tripsType[3]" [data]="trip"></Card>
+    </div>
+    <div class="trip" *ngIf="type === 'requested trips'">
+      <Card *ngFor="let trip of searchResults" (clickEmitter)="goToPage($event)" (actionEmitter)="handleTrip($event)" [type]="tripsType[0]" [data]="trip"></Card>
+    </div>
   </div>
 </div>

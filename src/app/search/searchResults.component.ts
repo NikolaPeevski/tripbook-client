@@ -5,6 +5,7 @@ import { ParamsService } from '../shared/params.service';
 import { SearchService } from '../shared/Search.service';
 import { UserService } from '../shared/User.service';
 import { ModalWindowService } from '../shared/modalWindow.service';
+import { TripsService } from '../shared/Trips.service';
 
 @Component({
   selector: 'searchresults',
@@ -27,14 +28,15 @@ export class SearchResultsComponent {
 
   currentCity: string;
 
-  tripsType = ['booking', 'trip-offer'];
+  tripsType = ['booking', 'trip-offer', 'city', 'review'];
 
 
   constructor (private _ParamsService: ParamsService,
                private _SearchService: SearchService,
                private _UserService: UserService,
                private _ModalWindowService: ModalWindowService,
-               private _Router: Router) {
+               private _Router: Router,
+               private _TripsService: TripsService) {
     this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
       if (params && params.currentModule === 'search') {
       this.params = params;
@@ -84,5 +86,27 @@ export class SearchResultsComponent {
 
   goToTripPage($event: any): void {
     this._Router.navigateByUrl(`trip/${$event}`);
+  }
+
+  searchForCity($event: any): void {
+    this._SearchService.searchFor($event, 'local');
+  }
+
+  createReview(): void {
+    this._ModalWindowService.openModal('review', this.currentCity);
+  }
+
+  goToPage($event: any): void {
+    console.log($event);
+    if ($event.type === 'trip')
+      return this.goToTripPage($event.id)
+    if ($event.type === 'user')
+      this._Router.navigateByUrl(`user/${$event.id}`);
+  }
+
+  handleTrip($event: any): void {
+    this._TripsService.handleBooking($event.id, $event.action)
+      .then(booking => {})
+      .catch(error => console.error(error));
   }
 }

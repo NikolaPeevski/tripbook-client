@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
-  templateUrl: './login.template.html',
+  templateUrl: './Login.template.html',
   styleUrls: ['./login.scss']
 })
 
@@ -27,7 +27,7 @@ export class LoginComponent {
   //false - singIn; true - signUp
   viewState: boolean = false;
 
-  constructor (private _LoginService: LoginService, 
+  constructor (private _LoginService: LoginService,
                private _Router: Router,
                private _ParamsService: ParamsService,
                private _ModalWindowService: ModalWindowService
@@ -59,5 +59,3 @@ export class LoginComponent {
   }
 
 }
-
-

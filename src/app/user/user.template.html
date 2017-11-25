@@ -1,7 +1,21 @@
-<div id="User">
-  <pre *ngIf="user">
-    {{ user | json }}
-  </pre>
-  <button *ngIf="params && !isGuest && !isUser && user && user.available" (click)="bookATrip()" mat-button color="primary">Book a trip</button>
-  <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-button color="primary" (click)="localApply()">Apply as a local person.</button>
+<div id="User" *ngIf="user">
+  <mat-tab-group *ngIf="user && user.available !== undefined" (selectedTabChange)="changeTab($event.tab.textLabel)">
+    <mat-tab label="Details"></mat-tab>
+    <mat-tab label="Reviews"></mat-tab>
+  </mat-tab-group>
+  <mat-tab-group *ngIf="user && user.available === undefined">
+    <mat-tab label="Details"></mat-tab>
+  </mat-tab-group>
+  <div class="Details" *ngIf="tab === 'Details'">
+
+    <pre *ngIf="user" >
+      {{ user | json }}
+    </pre>
+    <button *ngIf="params && !isGuest && !isUser && user && user.available" (click)="bookATrip()" mat-button color="primary">Book a trip</button>
+    <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-button color="primary" (click)="localApply()">Apply as a local person.</button>
+  </div>
+  <div class="Reviews" *ngIf="tab === 'Reviews' && reviews">
+    <button *ngIf="params && !isGuest && !isUser && user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+    <Card *ngFor="let review of reviews" [type]="'review'" [data]="review"></Card>
+  </div>
 </div>
