@@ -8,5 +8,6 @@ export interface Local {
   quote: string,
   user:User,
   rating: string,
-  review_count: number
+  review_count: number,
+  area: string
 }

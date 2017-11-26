@@ -5,7 +5,11 @@
     <div class="container">
       <div class="avatar"></div>
       <h2 class="name">{{ user.name.length > 0 ? user.name : user.email  }} {{ user.lastname }}</h2>
-      <div class="location"></div>
+      <div [ngClass]="{'availability': true, 'available': local.available && local.available === true}" *ngIf="isLocal">
+        <span *ngIf="local.available && local.available === true">Available</span>
+        <span *ngIf="!local.available || local.available !== true">Not available</span>
+      </div>
+      <div class="location" *ngIf="isLocal">{{ local.area }}</div>
       <div class="buttons">
           <button *ngIf="params && !isGuest && !isUser && user && user.available" (click)="bookATrip()" mat-raised-button color="primary">Book a trip</button>
           <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-raised-button color="basic" (click)="localApply()">Apply as a local person</button>

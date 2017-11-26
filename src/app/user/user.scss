@@ -42,6 +42,39 @@
     top: -40px;
     position: relative;
   }
+  
+  .availability {
+    display: block;
+    position: absolute;
+    top: 25px;
+    left: 210px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #D32F2F;
+
+    &.available {
+      color: #4CAF50;
+    }
+
+    &:before {
+      content: "᛫";
+      position: absolute;
+      left: -15px;
+      top: -20px;
+      font-size: 3em;
+    }
+    
+  }
+
+  .location {
+    font-size: 1.1em;
+    position: absolute;
+    display: block;
+    top: 45px;
+    left: 194px;
+    color: $secondary-text-color;
+  }
 }
 
 ::ng-deep .mat-tab-labels {
