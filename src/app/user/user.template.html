@@ -15,11 +15,11 @@
 
   <div class="contentBlock">
     <div class="container">
-        <mat-tab-group *ngIf="user && user.available !== undefined" (selectedTabChange)="changeTab($event.tab.textLabel)">
+        <mat-tab-group *ngIf="user && local" (selectedTabChange)="changeTab($event.tab.textLabel)">
           <mat-tab label="Details"></mat-tab>
           <mat-tab label="Reviews"></mat-tab>
         </mat-tab-group>
-        <mat-tab-group *ngIf="user && user.available === undefined">
+        <mat-tab-group *ngIf="user && !local">
           <mat-tab label="Details"></mat-tab>
         </mat-tab-group>
         <div class="Details" *ngIf="tab === 'Details'">

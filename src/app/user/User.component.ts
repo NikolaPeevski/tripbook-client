@@ -38,7 +38,6 @@ export class UserComponent {
                private _ReviewService: ReviewService) {
 
     this.paramsSub = this._ParamsService.paramsObs.subscribe(params => {
-      console.log("params", params)
       if (params && params.currentModule === 'user') {
         this.params = params;
         if (this.params.path !== '/')
@@ -54,6 +53,10 @@ export class UserComponent {
                   this.user = local.user;
                   this.isUser = true;
                   this.isLocal = true;
+
+
+                  
+                  console.log("local", local)
                 })
                 .catch(error => console.error(error)) }, 50);
                 
