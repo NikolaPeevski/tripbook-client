@@ -11,7 +11,7 @@
       </div>
       <div class="location" *ngIf="isLocal">{{ local.area }}</div>
       <div class="buttons">
-          <button *ngIf="params && !isGuest && !isUser && user && user.available" (click)="bookATrip()" mat-raised-button color="primary">Book a trip</button>
+          <button *ngIf="params && isLocal && local.available" (click)="bookATrip()" mat-raised-button color="basic">Book a trip</button>
           <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-raised-button color="basic" (click)="localApply()">Apply as a local person</button>
       </div>
     </div>
@@ -27,13 +27,23 @@
           <mat-tab label="Details"></mat-tab>
         </mat-tab-group>
         <div class="Details" *ngIf="tab === 'Details'">
+          <div class="local-detail-fields">
+            <div class="details-field">
+              <div class="field-label">Location</div>
+              <div class="field-value">{{ local.area || "Unknown" }}</div>
+            </div>
+            <div class="details-field">
+              <div class="field-label">About me</div>
+              <div class="field-value">{{ local.description || "Unknown" }}</div>
+            </div>
+          </div>
           <div class="details-field">
             <div class="field-label">Age</div>
-            <div class="field-value">16</div>
+            <div class="field-value">{{ local.age || "Unknown" }}</div>
           </div>
           <div class="details-field">
             <div class="field-label">Gender</div>
-            <div class="field-value">Male</div>
+            <div class="field-value">{{ local.gender || "Unknown" }}</div>
           </div>
         </div>
         <div class="Reviews" *ngIf="tab === 'Reviews' && reviews">
