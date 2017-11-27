@@ -39,13 +39,16 @@ export class LocalsService {
 
       this._httpWrapperService.get(`${Constants.LOCALS}/${id}`)
         .then(response => {
-
+          console.log("response", response)
           let local: Local = {
             id: response.id,
             available: response.available || false,
             city_id: response.city_id,
             description: response.description || '',
             quote: response.quote || '',
+            rating: response.rating || '0',
+            review_count: response.review_count || 0,
+            area: response.city ? `${response.city.name}, ${response.city.country.name}` : '',
             user: {
               'id': response.user.id,
               'local_id': response.id || '',
@@ -109,6 +112,9 @@ export class LocalsService {
               city_id: el.city_id,
               description: el.description || '',
               quote: el.quote || '',
+              rating: el.rating || '0',
+              review_count: el.review_count || 0,
+              area: el.city ? `${el.city.name}, ${el.city.country.name}` : '',
               user: {
                 'id': el.user.id,
                 'local_id': el.id || '',

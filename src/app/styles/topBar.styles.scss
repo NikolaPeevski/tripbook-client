@@ -51,17 +51,21 @@
 .logo {
   display: inline-block;
   float: left;
-  padding: 20px 0;
+  padding: 20px 3vw;
   width: 80px;
 
   img {
     max-width: 100%;
+    
+      &:hover {
+        cursor: pointer;
+      }
   }
 }
 
 .nav-buttons {
   text-align: right;
-  padding: 30px 0;
+  padding: 30px 5vw;
 
   .menu-button {
     color: white;

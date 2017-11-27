@@ -1,21 +1,56 @@
 <div id="User" *ngIf="user">
-  <mat-tab-group *ngIf="user && user.available !== undefined" (selectedTabChange)="changeTab($event.tab.textLabel)">
-    <mat-tab label="Details"></mat-tab>
-    <mat-tab label="Reviews"></mat-tab>
-  </mat-tab-group>
-  <mat-tab-group *ngIf="user && user.available === undefined">
-    <mat-tab label="Details"></mat-tab>
-  </mat-tab-group>
-  <div class="Details" *ngIf="tab === 'Details'">
 
-    <pre *ngIf="user" >
-      {{ user | json }}
-    </pre>
-    <button *ngIf="params && !isGuest && !isUser && user && user.available" (click)="bookATrip()" mat-button color="primary">Book a trip</button>
-    <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-button color="primary" (click)="localApply()">Apply as a local person.</button>
+  <div class="headerBlock">
+    <div class="bgShadow"></div>
+    <div class="container">
+      <div class="avatar"></div>
+      <h2 class="name">{{ user.name.length > 0 ? user.name : user.email  }} {{ user.lastname }}</h2>
+      <div [ngClass]="{'availability': true, 'available': local.available && local.available === true}" *ngIf="isLocal">
+        <span *ngIf="local.available && local.available === true">Available</span>
+        <span *ngIf="!local.available || local.available !== true">Not available</span>
+      </div>
+      <div class="location" *ngIf="isLocal">{{ local.area }}</div>
+      <div class="buttons">
+          <button *ngIf="params && isLocal && local.available" (click)="bookATrip()" mat-raised-button color="basic">Book a trip</button>
+          <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-raised-button color="basic" (click)="localApply()">Apply as a local person</button>
+      </div>
+    </div>
   </div>
-  <div class="Reviews" *ngIf="tab === 'Reviews' && reviews">
-    <button *ngIf="params && !isGuest && !isUser && user" (click)="createReview()" mat-button color="primary">Post a review!</button>
-    <Card *ngFor="let review of reviews" [type]="'review'" [data]="review"></Card>
+
+  <div class="contentBlock">
+    <div class="container">
+        <mat-tab-group *ngIf="user && local" (selectedTabChange)="changeTab($event.tab.textLabel)">
+          <mat-tab label="Details"></mat-tab>
+          <mat-tab label="Reviews"></mat-tab>
+        </mat-tab-group>
+        <mat-tab-group *ngIf="user && !local">
+          <mat-tab label="Details"></mat-tab>
+        </mat-tab-group>
+        <div class="Details" *ngIf="tab === 'Details'">
+          <div class="local-detail-fields">
+            <div class="details-field">
+              <div class="field-label">Location</div>
+              <div class="field-value">{{ local.area || "Unknown" }}</div>
+            </div>
+            <div class="details-field">
+              <div class="field-label">About me</div>
+              <div class="field-value">{{ local.description || "Unknown" }}</div>
+            </div>
+          </div>
+          <div class="details-field">
+            <div class="field-label">Age</div>
+            <div class="field-value">{{ local.age || "Unknown" }}</div>
+          </div>
+          <div class="details-field">
+            <div class="field-label">Gender</div>
+            <div class="field-value">{{ local.gender || "Unknown" }}</div>
+          </div>
+        </div>
+        <div class="Reviews" *ngIf="tab === 'Reviews' && reviews">
+          <button *ngIf="params && !isGuest && !isUser && user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+          <Card *ngFor="let review of reviews" [type]="'review'" [data]="review"></Card>
+        </div>
+    </div>
   </div>
+  
 </div>

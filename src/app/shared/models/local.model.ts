@@ -6,6 +6,8 @@ export interface Local {
   city_id: string,
   description: string,
   quote: string,
-  user:User
-
+  user:User,
+  rating: string,
+  review_count: number,
+  area: string
 }

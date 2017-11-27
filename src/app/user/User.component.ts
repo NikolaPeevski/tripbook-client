@@ -15,9 +15,11 @@ import { ReviewService } from '../shared/Review.service';
 
 export class UserComponent {
   user: any;
+  local: any;
 
   isGuest: boolean = false;
   isUser: boolean = false;
+  isLocal: boolean = false;
   paramsSub: any;
   params:any;
 
@@ -44,11 +46,21 @@ export class UserComponent {
             this.isUser = (this._UserService.user && this._UserService.user.email ? this._UserService.user.email === user.email : false);
             this.isGuest = this._UserService.isGuest();
 
-            if (user.has_local)
+            if (user.has_local) {
               setTimeout( () => {this._LocalService.getLocalById(user.local_id)
-                .then(local => this.user = local)
+                .then(local => {
+                  this.local = local;
+                  this.user = local.user;
+                  this.isUser = true;
+                  this.isLocal = true;
+
+
+                  
+                  console.log("local", local)
+                })
                 .catch(error => console.error(error)) }, 50);
-              else this.user = user;
+                
+            } else this.user = user;
           }).catch(error => console.error(error));
         }
     });

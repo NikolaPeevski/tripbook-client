@@ -1,12 +1,12 @@
 <div id="topBar" *ngIf="params && params.currentModule !== 'login'">
 
-  <div class="topBarBG" *ngIf="params && (params.currentModule === 'home' || params.currentModule === 'locals' || params.currentModule === 'search')"></div>
+  <div class="topBarBG" *ngIf="params && (params.currentModule === 'home' || params.currentModule === 'locals' || params.currentModule === 'search' || params.currentModule === 'trips')"></div>
   <div class="topBarContent">
     <mat-progress-spinner *ngIf="!params" mode="indeterminate" color="primary" fxLayoutAlign="center center">
     </mat-progress-spinner>
     
     <!-- START: Navigation -->
-    <div class="navigation container" *ngIf="params">
+    <div class="navigation" *ngIf="params">
       <a class="clicky logo" (click)="navigateTo('home')">
           <img src="assets/logo_symbol_white.svg" srcset="assets/logo_symbol_white.svg"/>
         </a> <!-- Make clicky work-->
@@ -40,14 +40,14 @@
     <div>
 
       <!-- START: Home text -->
-      <div class="container">
+      <div class="container" *ngIf="params && (params.currentModule === 'home' || params.currentModule === 'locals' || params.currentModule === 'trips' || params.currentModule === 'search')">
         <div class="homeText" *ngIf="params && params.currentModule === 'home'">
           <h1>Tripbook</h1>
           <p>Experience the city through the eyes of a local & share it with others.</p>
         </div>
         <div class="search" id="SearchBar">
 
-            <div class="searchResultsHeader" *ngIf="params && (params.currentModule === 'locals' || params.currentModule === 'search')">
+            <div class="searchResultsHeader" *ngIf="params && (params.currentModule === 'search')">
               Search Results
             </div>
 
@@ -83,7 +83,7 @@
           <mat-tab label="Reviews" ></mat-tab>
         </mat-tab-group>
         <mat-tab-group *ngIf="params.path.indexOf('cities') !== -1">
-          <mat-tab label="locations"></mat-tab>
+          <mat-tab label="Cities"></mat-tab>
         </mat-tab-group>
       </div>
       <!-- END: Search tabs -->

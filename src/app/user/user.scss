@@ -1,0 +1,124 @@
+@import '../../assets/palette';
+
+.headerBlock {
+  display: block;
+  position: relative;
+  top: -75px;
+  background-color: $primary-color;
+  padding: 15px;
+  padding-top: 10vh;
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .avatar {
+    float: left;
+    position: absolute;
+    width: 150px;
+    border: 3px solid white;
+    height: 150px;
+    border-radius: 100px;
+    background: gray;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+    top: -80px;
+    background-image: url(/assets/no_avatar.jpg);
+    background-size: cover;
+  }
+
+  .name {
+    color: white;
+    margin: 0;
+    padding: 0;
+    left: 180px;
+    position: relative;
+    float: left;
+    top: -30px;
+  }
+
+  .buttons {
+    float: right;
+    top: -40px;
+    position: relative;
+  }
+  
+  .availability {
+    display: block;
+    position: absolute;
+    top: 25px;
+    left: 210px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #D32F2F;
+
+    &.available {
+      color: #4CAF50;
+    }
+
+    &:before {
+      content: "᛫";
+      position: absolute;
+      left: -15px;
+      top: -20px;
+      font-size: 3em;
+    }
+    
+  }
+
+  .location {
+    font-size: 1.1em;
+    position: absolute;
+    display: block;
+    top: 45px;
+    left: 194px;
+    color: $secondary-text-color;
+  }
+}
+
+::ng-deep .mat-tab-labels {
+  margin-top: 15px;
+  border-bottom: 1px solid #c3c3c3;
+}
+
+::ng-deep .mat-tab-group {
+  min-width: 100%;
+}
+
+.details-field {
+  padding: 20px 45px;
+  border-bottom: 1px solid #eaeaea;
+
+  .field-label {
+    color: $accent-color;
+    font-weight: bold;
+    margin-bottom: 3px
+  }
+}
+
+#User {
+
+  ::ng-deep .mat-tab-label {
+    color: $primary-text-color;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 1.05em;
+  }
+  
+  ::ng-deep .mat-tab-label.mat-tab-label-active {
+    color: $primary-text-color;
+    font-weight: bold;
+    opacity: 1;
+    background-color: transparent !important;
+  }
+  
+  ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: $primary-color;
+    height: 3px;
+  }
+  
+  ::ng-deep .mat-tab-nav-bar, ::ng-deep .mat-tab-header {
+    border: 0;
+  }
+}

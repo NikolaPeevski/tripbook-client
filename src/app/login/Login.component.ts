@@ -58,4 +58,13 @@ export class LoginComponent {
     this._Router.navigateByUrl(`${previousModule}`)
   }
 
+  // handles events on key press
+  keypressHandler(keyCode, action): void {
+    // if key press was ENTER, then run the sign in method
+    if (keyCode == 13) {
+      if (action == "signin") this.signIn(); 
+      else if (action == "signup") this.signUp(); 
+    }
+  }
+
 }

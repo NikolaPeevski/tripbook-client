@@ -68,7 +68,7 @@ export class AreaService {
             country: el.parent_area || ''
           };
           return Area;
-        });
+        }).sort((a,b) => a.name > b.name && a.name.split(' ').length > b.name.split(' ').length);
         return resolve (results);
       })
       .catch(error => reject(error));
