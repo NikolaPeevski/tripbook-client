@@ -102,7 +102,7 @@ signOut(): Promise<any> {
         .map(response => response)
           .toPromise()
             .then(data => {
-              this._UserService.defineUser({});
+              this._UserService.defineUser(undefined);
               resolve(data.json()) })
             .catch(error => reject(error));
     });

@@ -97,7 +97,6 @@ export class SearchResultsComponent {
   }
 
   goToPage($event: any): void {
-    console.log($event);
     if ($event.type === 'trip')
       return this.goToTripPage($event.id)
     if ($event.type === 'user')
