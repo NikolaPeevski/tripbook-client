@@ -11,7 +11,7 @@
       </div>
       <div class="location" *ngIf="isLocal">{{ local.area }}</div>
       <div class="buttons">
-          <button *ngIf="params && isLocal && local.available" (click)="bookATrip()" mat-raised-button color="basic">Book a trip</button>
+          <button *ngIf="params && !isGuest && isLocal && local.available && !isUser" (click)="bookATrip()" mat-raised-button color="basic">Book a trip</button>
           <button *ngIf="params && !isGuest && isUser && user && user.has_local === false" mat-raised-button color="basic" (click)="localApply()">Apply as a local person</button>
       </div>
     </div>
@@ -19,7 +19,10 @@
 
   <div class="contentBlock">
     <div class="container">
-        <mat-tab-group *ngIf="user && local" (selectedTabChange)="changeTab($event.tab.textLabel)">
+        <mat-tab-group *ngIf="user && local && !isLocal" (selectedTabChange)="changeTab($event.tab.textLabel)">
+          <mat-tab label="Details"></mat-tab>
+        </mat-tab-group>
+        <mat-tab-group *ngIf="user && local && isLocal" (selectedTabChange)="changeTab($event.tab.textLabel)">
           <mat-tab label="Details"></mat-tab>
           <mat-tab label="Reviews"></mat-tab>
         </mat-tab-group>
@@ -52,5 +55,5 @@
         </div>
     </div>
   </div>
-  
+
 </div>

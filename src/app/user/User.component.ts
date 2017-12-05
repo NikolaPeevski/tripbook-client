@@ -43,7 +43,6 @@ export class UserComponent {
         if (this.params.path !== '/')
         this._UserService.getUserById(this.params.path)
           .then(user => {
-            this.isUser = (this._UserService.user && this._UserService.user.email ? this._UserService.user.email === user.email : false);
             this.isGuest = this._UserService.isGuest();
 
             if (user.has_local) {
@@ -53,15 +52,22 @@ export class UserComponent {
                   this.user = local.user;
                   this.isUser = true;
                   this.isLocal = true;
-
-
-                  
-                  console.log("local", local)
+                  console.log(this.isLocal)
                 })
                 .catch(error => console.error(error)) }, 50);
-                
-            } else this.user = user;
-          }).catch(error => console.error(error));
+
+            } else {
+              // Quick fix due to time.
+              this.user = user;
+              this.local = user;
+            };
+          }).catch(error => console.error(error))
+          .finally(() => {
+              setTimeout(() => {
+                this.isUser =  (this._UserService.user.email ? this.local.local ? this._UserService.user.email === this.local.user.email : this._UserService.user.email === this.user.email : false);
+                this.isGuest = this._UserService.isGuest();
+              }, 150);
+          });
         }
     });
 

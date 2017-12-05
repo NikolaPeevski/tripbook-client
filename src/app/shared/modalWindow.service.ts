@@ -12,7 +12,6 @@ export class ModalWindowService {
                {}
 
   public openModal(type: string, cityName?: string, local_id?: string, trip_id?: string, error?: string): void {
-    console.log('lol')
     let config: MatDialogConfig = { data: { 'type': type, cityName, local_id, trip_id, error}}
     this._MatDialog.open(modalWindowComponent, config);
   }

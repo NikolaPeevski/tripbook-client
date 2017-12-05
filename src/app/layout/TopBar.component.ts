@@ -68,7 +68,7 @@ export class TopBarComponent {
                     // get the name of the city, check if its an array and so
                     this.currentCity = cityObj === null ? "" : ((cityObj instanceof Array) ? cityObj[0] : cityObj);
                     // set the search value
-                    this.searchFormContol.setValue(this.currentCity.replace(/(%20)/g, " "));
+                    this.searchFormContol.setValue(decodeURIComponent(this.currentCity));
 
                     if (this.params.path.indexOf('cities') === -1) {
                       let currentTab = decodeURIComponent((this.params.path.split('tab=')).pop());
@@ -106,7 +106,7 @@ export class TopBarComponent {
                    setTimeout(() => {
 
                    this.checkForOwnCity();
-                  },50);
+                  }, 50);
 
                  });
                }

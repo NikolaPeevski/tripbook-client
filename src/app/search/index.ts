@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CustomMaterialModule } from '../shared/material.module';
 import { ComponentsModule } from '../shared/components';
+import { PipesModule } from '../shared/pipes';
 
 import { SearchResultsComponent } from './searchResults.component';
 import { SearchResultComponent } from './searchResult/searchResult.component';
@@ -28,6 +29,7 @@ export const routes = [
     ReactiveFormsModule,
     CustomMaterialModule,
     FlexLayoutModule,
+    PipesModule,
     ComponentsModule,
     RouterModule.forChild(routes),
   ],
