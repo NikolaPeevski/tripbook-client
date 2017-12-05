@@ -172,7 +172,6 @@ checkedValue(value: any) {
  }
 
  postAReview(): void {
-   console.log({'text': this.secondFormGroup['_value'].description, 'rating': this.numberOfPeople, 'id': this.local_id ? this.local_id : this.trip_id, 'review_type': this.local_id ? 'local' : 'trip'}, this.selectCity);
    if (this.selectedCity)
    this._AreaService.searchAreas(this.selectedCity, true)
     .then(city => {

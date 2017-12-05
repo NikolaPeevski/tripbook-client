@@ -18,6 +18,9 @@ import { ComponentsModule } from './shared/components';
 //Component dependencies
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './layout/TopBar.component';
+
+//Pipes
+import { PipesModule } from './shared/pipes';
 //Module providers
 import { Angular2TokenService } from 'angular2-token';
 import { JWTHandlerService } from './shared/JWTHandler.service';
@@ -45,6 +48,7 @@ import { ModalWindowService } from './shared/modalWindow.service';
     FlexLayoutModule,
     CustomMaterialModule,
     FormsModule,
+    PipesModule,
     ReactiveFormsModule,
     ComponentsModule,
     RouterModule.forRoot(ROUTES, { useHash: false })

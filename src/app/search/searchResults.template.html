@@ -5,7 +5,7 @@
     <div class="locals" *ngIf="type === 'locals'">
       <!-- Details block -->
       <div class="detailsBlock">
-        Discover <b>{{ currentCity }}</b>, with one of the <b>{{ searchResults.length }} locals</b> who are ready to show you around.
+        Discover <b>{{ currentCity | Decode }}</b>, with one of the <b>{{ searchResults.length }} locals</b> who are ready to show you around.
       </div>
       <!-- List the results -->
       <Card *ngFor="let result of searchResults" [data]="result" [type]="type" [size]="size" (clickEmitter)="goToProfilePage($event)"></Card>
@@ -15,7 +15,7 @@
     <div class="trip" *ngIf="type === 'trips'">
       <!-- Details block -->
       <div class="detailsBlock">
-        Discover <b>{{ currentCity }}</b>, choose one of the <b>{{ searchResults.length }} trip offers</b> that the local people have organized for you!
+        Discover <b>{{ currentCity | Decode }}</b>, choose one of the <b>{{ searchResults.length }} trip offers</b> that the local people have organized for you!
         <div class="detailsBlockButtons">
           <button *ngIf="user" (click)="createTripRequest()" mat-raised-button color="primary">Request a trip</button>
         </div>

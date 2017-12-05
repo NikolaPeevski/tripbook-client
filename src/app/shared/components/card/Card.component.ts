@@ -44,11 +44,9 @@ export class CardComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data && changes.data.currentValue) {
-      console.log(changes);
       if (this.type === 'locals' || this.type === 'local')
-      this._AreaService.getCity(changes.data.currentValue.city_id)
-        .then(city => this.city = `${city.name}, ${city.country.name}`)
-        .catch(error => console.error(error));
+          this.city = changes.data.currentValue.area ? changes.data.currentValue.area
+            : `${changes.data.currentValue.city.name}, ${changes.data.currentValue.city.country.name}`;
 
       if (this.type === 'booking')
       this._TripsService.getTrip(this.data.trip_id || this.data.id)
