@@ -130,7 +130,6 @@ export class TopBarComponent {
             this._AreaService.searchAreas(search[0], true)
               .then(city => {
                 this.isOwnCity = (city[0] && local.city_id === city[0].id);
-                console.log(this.isOwnCity);
               });
         }, 50);
 
