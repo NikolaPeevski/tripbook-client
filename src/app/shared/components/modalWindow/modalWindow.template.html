@@ -22,7 +22,7 @@
         <ng-template matStepLabel>Fill out your city of choice</ng-template>
         <mat-form-field>
               <input matInput placeholder="Your desired city:" (keyup)="keyUp.next($event)" [matAutocomplete]="auto" formControlName="city" required>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+                <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let item of autocomplete" [value]="item.name" (click)="selectCity(item)">
                     <span>{{ item.name }}</span>
                   </mat-option>
