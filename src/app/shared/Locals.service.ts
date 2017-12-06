@@ -39,11 +39,10 @@ export class LocalsService {
 
       this._httpWrapperService.get(`${Constants.LOCALS}/${id}`)
         .then(response => {
-          console.log("response", response)
           let local: Local = {
             id: response.id,
             available: response.available || false,
-            city_id: response.city_id,
+            city_id: response.city.id,
             description: response.description || '',
             quote: response.quote || '',
             rating: response.rating || '0',
@@ -132,7 +131,7 @@ export class LocalsService {
             }
             return local;
           });
-          
+
           return resolve(results);
         }).catch(error => reject(error));
     });

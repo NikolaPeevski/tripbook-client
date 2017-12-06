@@ -74,10 +74,9 @@ export class CardComponent {
       this.clickEmitter.emit(this.data.user.id);
     if (this.type === 'trip-offer')
       this.clickEmitter.emit(this.data.id);
-    if (this.type === 'booking') {
-      console.log($event);
+    if (this.type === 'booking')
       this.clickEmitter.emit($event);
-    }
+    
     if (this.type === 'city')
       this.clickEmitter.emit(this.location.name);
   }

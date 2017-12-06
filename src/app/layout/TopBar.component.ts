@@ -123,14 +123,14 @@ export class TopBarComponent {
 
   checkForOwnCity(): void {
     if (this.params && this.params.currentModule === 'search' && this.user && this.user.has_local) {
-
       let search = (this.params.path.split('/').pop()).split('?tab=')
       this._LocalsService.getLocalById(this.user.local_id)
         .then(local => {
           setTimeout(() => {
             this._AreaService.searchAreas(search[0], true)
               .then(city => {
-                this.isOwnCity = (city[0] && local.city_id === city[0].id)
+                this.isOwnCity = (city[0] && local.city_id === city[0].id);
+                console.log(this.isOwnCity);
               });
         }, 50);
 
