@@ -17,7 +17,7 @@ export const routes = [
     { path: 'my', redirectTo: 'my/trips'},
     { path: 'my/trips', component: TripsComponent, pathMatch: 'full'},
     { path: 'rated', component: RatedTripsComponent, pathMatch: 'full'},
-    { path: 'popular', component: PopularTripsComponent, pathMatch: 'full'},
+    { path: 'popular', component: PopularTripsComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
