@@ -1,0 +1,28 @@
+@import '../../../assets/palette';
+
+#trips {
+    margin-bottom: 15vh;
+
+    ::ng-deep .mat-tab-label {
+        color: $primary-text-color;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 1.05em;
+      }
+      
+      ::ng-deep .mat-tab-label.mat-tab-label-active {
+        color: $primary-text-color;
+        font-weight: bold;
+        opacity: 1;
+        background-color: transparent !important;
+      }
+      
+      ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+        background-color: $primary-color;
+        height: 3px;
+      }
+      
+      ::ng-deep .mat-tab-nav-bar, ::ng-deep .mat-tab-header {
+        border: 0;
+      }
+}

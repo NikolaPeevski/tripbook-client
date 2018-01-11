@@ -1,6 +1,6 @@
 <div *ngIf="data && (type === 'locals' || type === 'local')">
-  <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
+    <img mat-card-image src="https://source.unsplash.com/300x300/?people,woman,man,lady,guy" alt="">
     <mat-card-content class="card-floating">
       <span class="name">{{ data.user.name || data.user.email }}</span>
       <span class="city">{{ city }}</span>
@@ -10,8 +10,9 @@
     </mat-card-footer>
   </mat-card>
 </div>
+
 <div *ngIf="data && (type === 'trip-offer')">
-  <mat-card class="card" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
+  <mat-card class="card" [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
     <mat-card-title>
       {{ data.title }}
     </mat-card-title>
@@ -23,7 +24,7 @@
     </mat-card-content>
     <mat-card-footer>
       <span>
-        Rating2...
+        <i class="material-icons">star_rate</i> <span class="card-rating">{{data.rating}}</span> <span class="card-reviews">({{data.review_count}} Reviews)</span>
       </span>
       <span>
         <button mat-button (click)="clicked()">OPEN TRIP</button>
@@ -32,7 +33,7 @@
   </mat-card>
 </div>
 <div *ngIf="data && (type === 'booking') && trip">
-  <mat-card class="card" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
+  <mat-card class="card" [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
     <mat-card-title>
       {{ trip.title }}
     </mat-card-title>
@@ -62,19 +63,22 @@
   </mat-card>
 </div>
 <div *ngIf="data && type === 'city' && location">
-  <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-title>
-      {{ location.name }} <br /> {{ location.country.name }}
-    </mat-card-title>
+  <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
+    <div class="card-inner-wrap">
+      <img mat-card-image src="https://source.unsplash.com/300x30{{location.id%9}}/?city" alt="">
+      <mat-card-title class="city-card-title">
+        {{ location.name }}
+      </mat-card-title>
+    </div>
     <mat-card-footer>
-      Total number of trips : {{ totalTrips }} |Rating...
+      <span class="city-card-total">Total number of trips: {{ totalTrips }}</span>
+      <!-- <span class="city-card-rating"><i class="material-icons">star_rate</i> <span class="card-rating">{{data.rating}}</span> <span class="card-reviews">({{data.review_count}} Reviews)</span></span> -->
     </mat-card-footer>
   </mat-card>
 </div>
 <div *ngIf="data && type === 'review' && reviewer">
-  <mat-card [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
+    <img mat-card-image src="https://source.unsplash.com/300x300/?people,woman,man,lady,guy" alt="">
     <mat-card-title>
       {{ reviewer.email }}
     </mat-card-title>

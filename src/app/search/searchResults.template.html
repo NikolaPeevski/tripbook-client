@@ -2,17 +2,17 @@
   <div class="results" *ngIf="searchResults">
 
     <!-- Locals tab -->
-    <div class="locals" *ngIf="type === 'locals'">
+    <div class="locals row" *ngIf="type === 'locals'">
       <!-- Details block -->
       <div class="detailsBlock">
         Discover <b>{{ currentCity | Decode }}</b>, with one of the <b>{{ searchResults.length }} locals</b> who are ready to show you around.
       </div>
       <!-- List the results -->
-      <Card *ngFor="let result of searchResults" [data]="result" [type]="type" [size]="size" (clickEmitter)="goToProfilePage($event)"></Card>
+      <Card *ngFor="let result of searchResults" [data]="result" [type]="type" [size]="size" (clickEmitter)="goToProfilePage($event)" class="col col-sm-6 col-md-4"></Card>
     </div>
 
     <!-- Trips tab -->
-    <div class="trip" *ngIf="type === 'trips'">
+    <div class="trip row" *ngIf="type === 'trips'">
       <!-- Details block -->
       <div class="detailsBlock">
         Discover <b>{{ currentCity | Decode }}</b>, choose one of the <b>{{ searchResults.length }} trip offers</b> that the local people have organized for you!
@@ -21,17 +21,27 @@
         </div>
       </div>
       <!-- List the results -->
-      <Card *ngFor="let trip of searchResults" (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
+      <div *ngFor="let trip of searchResults" class="col col-sm-6 col-md-4">
+        <Card (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
+      </div>
     </div>
-    <div class="trip" *ngIf="type === 'cities'">
-      <Card *ngFor="let city of searchResults" (clickEmitter)="searchForCity($event)" [type]="tripsType[2]" [data]="city"></Card>
+    <div class="trip row" *ngIf="type === 'cities'">
+      <div *ngFor="let city of searchResults" class="col col-sm-6 col-md-4">
+        <Card (clickEmitter)="searchForCity($event)" [type]="tripsType[2]" [data]="city"></Card>
+      </div>
     </div>
-    <div class="trip" *ngIf="type === 'reviews'">
+    <div class="trip row" *ngIf="type === 'reviews'">
       <button *ngIf="user" (click)="createReview()" mat-button color="primary">Post a review!</button>
-      <Card *ngFor="let trip of searchResults" [type]="tripsType[3]" [data]="trip"></Card>
+
+      <div *ngFor="let trip of searchResults" class="col col-md-6">
+        <Card [type]="tripsType[3]" [data]="trip"></Card>
+      </div>
     </div>
-    <div class="trip" *ngIf="type === 'requested trips'">
-      <Card *ngFor="let trip of searchResults" (clickEmitter)="goToPage($event)" (actionEmitter)="handleTrip($event)" [type]="tripsType[0]" [data]="trip"></Card>
+    <div class="trip row" *ngIf="type === 'requested trips'">
+
+      <div *ngFor="let trip of searchResults" class="col col-sm-6 col-md-4">
+        <Card *ngFor="let trip of searchResults" (clickEmitter)="goToPage($event)" (actionEmitter)="handleTrip($event)" [type]="tripsType[0]" [data]="trip"></Card>
+      </div>
     </div>
   </div>
 </div>
