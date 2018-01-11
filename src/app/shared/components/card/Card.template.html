@@ -1,8 +1,9 @@
 <div *ngIf="data && (type === 'locals' || type === 'local')">
   <mat-card (click)="clicked()" class="card clicky" [ngStyle]="{'width.px': size === 's' ? '200' : '400'}">
     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      {{data.user.email}} <br /> {{ city }}
+    <mat-card-content class="card-floating">
+      <span class="name">{{ data.user.name || data.user.email }}</span>
+      <span class="city">{{ city }}</span>
     </mat-card-content>
     <mat-card-footer>
       <i class="material-icons">star_rate</i> <span class="card-rating">{{data.rating}}</span> <span class="card-reviews">({{data.review_count}} Reviews)</span>
