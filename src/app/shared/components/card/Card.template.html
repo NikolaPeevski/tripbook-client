@@ -5,7 +5,7 @@
       {{data.user.email}} <br /> {{ city }}
     </mat-card-content>
     <mat-card-footer>
-      Rating...
+      <i class="material-icons">star_rate</i> <span class="card-rating">{{data.rating}}</span> <span class="card-reviews">({{data.review_count}} Reviews)</span>
     </mat-card-footer>
   </mat-card>
 </div>
@@ -22,7 +22,7 @@
     </mat-card-content>
     <mat-card-footer>
       <span>
-        Rating...
+        Rating2...
       </span>
       <span>
         <button mat-button (click)="clicked()">OPEN TRIP</button>
