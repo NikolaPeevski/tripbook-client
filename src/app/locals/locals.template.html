@@ -1,3 +1,7 @@
-<div id="locals" *ngIf="locals" fxLayoutAlign="center center" class="container">
-    <Card *ngFor="let local of locals" [data]="local" [size]="size" [type]="'local'" (clickEmitter)="goToProfilePage($event)"></Card>
+<div id="locals" *ngIf="locals" class="container">
+    <div class="row">
+        <div *ngFor="let local of locals" class="col col-sm-6 col-md-4 col-lg-3">
+            <Card [data]="local" [size]="size" [type]="'local'" (clickEmitter)="goToProfilePage($event)"></Card>
+        </div>
+    </div>
 </div>
