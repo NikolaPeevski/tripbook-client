@@ -8,7 +8,8 @@ import { ReviewService } from '../shared/Review.service';
 
 @Component({
   selector: `trip`,
-  templateUrl: `./Trip.template.html`
+  templateUrl: `./Trip.template.html`,
+  styleUrls: ['./trip.scss']
 })
 export class TripComponent {
 

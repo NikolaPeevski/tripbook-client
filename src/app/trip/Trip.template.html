@@ -1,17 +1,64 @@
-<div id="trip">
-  <mat-tab-group (selectedTabChange)="changeTab($event.tab.textLabel)">
-    <mat-tab label="Details"></mat-tab>
-    <mat-tab label="Reviews"></mat-tab>
-  </mat-tab-group>
+<div id="trip" *ngIf="trip">
 
-  <div class="details" *ngIf="tab === 'Details'">
-    <button *ngIf="trip && user && trip.user.id !== user.id" (click)="bookTrip()" mat-button color="primary">Make a booking!</button>
-    <pre *ngIf="trip">
-      {{ trip | json }}
-    </pre>
+    <div class="headerBlock">
+      <div class="bgShadow"></div>
+      <div class="container">
+        <h2 class="name">{{ trip.title }}</h2>
+        <div class="location"><i class="material-icons">location_on</i> {{ trip.city.name }}, {{ trip.city.country.name }}</div>
+        <div class="buttons">
+            <button *ngIf="params" (click)="bookTrip()" mat-raised-button color="basic">Book a trip</button>
+        </div>
+        <div class="reviews-widget">
+            <i class="material-icons">star_rate</i>
+            <span class="rating">{{ trip.rating }}</span>
+            <span class="review-count">({{ trip.review_count }} Reviews)</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="contentBlock">
+      <div class="container">
+          <mat-tab-group (selectedTabChange)="changeTab($event.tab.textLabel)">
+            <mat-tab label="Details"></mat-tab>
+            <mat-tab label="Reviews"></mat-tab>
+          </mat-tab-group>
+          <div class="Details" *ngIf="tab === 'Details'">
+            <div class="details-field" *ngIf="trip.user.local_id !== null">
+              <div class="field-label">Local</div>
+              <div class="field-value">
+                <div class="avatar"><img mat-card-image src="https://source.unsplash.com/100x100/?people,woman,man,lady,guy" alt=""></div>
+                <div class="name">{{ trip.user.name.length > 0 ? (trip.user.name + " " + trip.user.lastname) : trip.user.email }}</div>
+                
+              </div>
+            </div>
+            <div class="details-field">
+              <div class="field-label">Description</div>
+              <div class="field-value">{{ trip.description || "Unknown" }}</div>
+            </div>
+            <div class="details-field">
+              <div class="field-label">Number of people</div>
+              <div class="field-value">{{ trip.number_of_people || "Unknown" }}</div>
+            </div>
+            <div class="details-field">
+              <div class="field-label">From date</div>
+              <div class="field-value">{{ trip.from_date || "Unknown" }}</div>
+            </div>
+            <div class="details-field">
+              <div class="field-label">To date</div>
+              <div class="field-value">{{ trip.to_date || "Unknown" }}</div>
+            </div>
+          </div>
+          <div class="Reviews" *ngIf="tab === 'Reviews' && reviews">
+            <button *ngIf="!isGuest && !isUser && user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+            
+              <div class="row">
+                <div *ngFor="let review of reviews"  class="col col-md-6">
+                  <Card [type]="'review'" [data]="review"></Card>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  
   </div>
-  <div class="reviews" *ngIf="tab === 'Reviews' && reviews">
-    <button *ngIf="user" (click)="createReview()" mat-button color="primary">Post a review!</button>
-    <Card *ngFor="let review of reviews" [type]="'review'" [data]="review"></Card>
-  </div>
-</div>
+  
