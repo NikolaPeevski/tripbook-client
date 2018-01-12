@@ -22,6 +22,7 @@ export class CardComponent {
   @Output() actionEmitter = new EventEmitter<any>();
 
   private city: string = '';
+  Arr = Array;
   trip:any;
   totalTrips:any;
 

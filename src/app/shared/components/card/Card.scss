@@ -166,3 +166,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   display: block;
   text-overflow: ellipsis;
 }
+
+.review-card {
+  padding-top: 0;
+  margin-top: 20px;
+
+  .trip-offer-local {
+    margin-top: 0;
+  }
+
+  .material-icons {
+    color: gold;
+    width: 22px;
+  }
+
+  .mat-card-footer {
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 20px;
+  }
+}

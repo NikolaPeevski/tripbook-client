@@ -80,16 +80,17 @@
   </mat-card>
 </div>
 <div *ngIf="data && type === 'review' && reviewer">
-  <mat-card [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
-    <img mat-card-image src="https://source.unsplash.com/300x300/?people,woman,man,lady,guy" alt="">
-    <mat-card-title>
-      {{ reviewer.email }}
-    </mat-card-title>
+  <mat-card class="review-card" [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
+    <mat-card-content class="trip-offer-local">
+      <span class="to-avatar" [ngStyle]="{'background-image': 'url(https://source.unsplash.com/100x10'+data.id%9+'/?people,woman,man,lady,guy)'}"></span>
+      <span class="to-name">{{reviewer.name || "Unknown"}}</span>
+      <span class="to-email">{{reviewer.email}}</span>
+    </mat-card-content>
     <mat-card-content>
       {{ data.text }}
     </mat-card-content>
     <mat-card-footer>
-    Rating: {{data.stars}}
+      <i *ngFor="let i of Arr(data.stars).fill(1)" class="material-icons">star_rate</i><i *ngFor="let i of Arr(5-data.stars).fill(1)" class="material-icons">star_border</i>
     </mat-card-footer>
   </mat-card>
 </div>

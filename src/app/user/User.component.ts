@@ -97,7 +97,7 @@ export class UserComponent {
     this.tab = $event;
 
     if ($event === 'Reviews')
-      this._ReviewService.getReview('local', this.user.id)
+      this._ReviewService.getReview('local', this.local.id)
         .then(reviews => this.reviews = reviews.reviews)
         .catch(error => console.error(error));
   }
