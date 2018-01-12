@@ -103,6 +103,6 @@ export class UserComponent {
   }
 
   createReview(): void {
-    this._ModalWindowService.openModal('review', null, this.user.id);
+    this._ModalWindowService.openModal('review', null, this.local.id);
   }
 }
