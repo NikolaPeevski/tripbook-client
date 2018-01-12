@@ -121,6 +121,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   margin: -10px;
   margin-top: 10px;
   border-top: 1px solid #e8e8e8;
+  padding: 4px 8px;
 }
 
 .trip-offer-card-title {
@@ -183,5 +184,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   .mat-card-footer {
     border-top: 1px solid #e8e8e8;
     padding: 10px 20px;
+  }
+}
+
+.booking-card {
+
+  .mat-card-title {
+    margin: -24px;
+    margin-bottom: 16px;
+    font-size: 20px;
+    border-bottom: 1px solid #e8e8e8;
+    font-weight: bold;
+    padding: 20px;
+  }
+
+  .mat-card-footer {
+    padding: 4px 8px;
   }
 }
