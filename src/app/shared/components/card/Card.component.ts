@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/
 import { AreaService } from '../../Area.service';
 import { TripsService } from '../../Trips.service';
 import { UserService } from '../../User.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'Card',
@@ -33,7 +34,8 @@ export class CardComponent {
 
   constructor (private _AreaService: AreaService,
                private _TripsService: TripsService,
-               private _UserService: UserService){
+               private _UserService: UserService,
+               private _Router: Router){
 
                this.userSub = this._UserService.currentUser.subscribe(user => {
                  if (user)
@@ -67,6 +69,11 @@ export class CardComponent {
           .then(reviewer => this.reviewer = reviewer)
           .catch(error => console.error(error));
     }
+  }
+
+
+  openLocal() {
+    this._Router.navigateByUrl(`user/${this.data.user.id}`);
   }
 
   clicked($event?: any): void {

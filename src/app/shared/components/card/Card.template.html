@@ -29,6 +29,7 @@
         <i class="material-icons">star_rate</i> <span class="card-rating">{{data.rating}}</span> <span class="card-reviews">({{data.review_count}} Reviews)</span>
       </span>
       <span class="trip-offer-buttons">
+        <button mat-button (click)="openLocal()">SHOW LOCAL</button>
         <button mat-button (click)="clicked()">OPEN TRIP</button>
       </span>
     </mat-card-footer>
