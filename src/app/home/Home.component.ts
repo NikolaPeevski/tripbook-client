@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
     this._TripsService.getTrips('popularity')
       .then(response => {
-        this.trips = response.trips.slice(0, 5);
+        this.trips = response.trips.slice(0, 6);
       }).catch(error => console.error(error));
   }
 

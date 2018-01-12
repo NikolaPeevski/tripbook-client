@@ -13,20 +13,22 @@
 
 <div *ngIf="data && (type === 'trip-offer')">
   <mat-card class="card" [ngStyle]="{'width.px': size === 's' ? '200' : ''}">
-    <mat-card-title>
+    <mat-card-title class="trip-offer-card-title">
       {{ data.title }}
     </mat-card-title>
-    <mat-card-content>
-      {{data.user.email}}
+    <mat-card-content class="trip-offer-local">
+      <span class="to-avatar" [ngStyle]="{'background-image': 'url(https://source.unsplash.com/100x10'+data.id%9+'/?people,woman,man,lady,guy)'}"></span>
+      <span class="to-name">{{data.user.name || "Host"}}</span>
+      <span class="to-email">{{data.user.email}}</span>
     </mat-card-content>
-    <mat-card-content>
+    <mat-card-content class="trip-offer-card-content">
       {{data.description}}
     </mat-card-content>
     <mat-card-footer>
       <span>
         <i class="material-icons">star_rate</i> <span class="card-rating">{{data.rating}}</span> <span class="card-reviews">({{data.review_count}} Reviews)</span>
       </span>
-      <span>
+      <span class="trip-offer-buttons">
         <button mat-button (click)="clicked()">OPEN TRIP</button>
       </span>
     </mat-card-footer>
@@ -40,7 +42,7 @@
     <mat-card-content>
       {{trip.user.email}}
     </mat-card-content>
-    <mat-card-content>
+    <mat-card-content class="trip-card-content">
       {{trip.description}}
     </mat-card-content>
     <mat-card-footer>
