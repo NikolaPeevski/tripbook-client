@@ -16,8 +16,10 @@ export class ReviewService {
   createReview(review : { text: string, rating: string, id: string, review_type: string }): Promise<any> {
     return new Promise((resolve, reject) => {
       const payload = {
-        text: review.text,
-        stars: review.rating
+        review: {
+          text: review.text,
+          stars: review.rating
+        }
       };
 
       this._httpWrapperService.post(`${Constants.REVIEW}/${review.review_type}/${review.id}`, payload)

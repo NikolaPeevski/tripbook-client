@@ -50,8 +50,13 @@
           </div>
         </div>
         <div class="Reviews" *ngIf="tab === 'Reviews' && reviews">
-          <button *ngIf="params && !isGuest && !isUser && user" (click)="createReview()" mat-button color="primary">Post a review!</button>
-          <Card *ngFor="let review of reviews" [type]="'review'" [data]="review"></Card>
+          <button *ngIf="!isGuest && !isUser && user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+          
+            <div class="row">
+              <div *ngFor="let review of reviews"  class="col col-md-6">
+                <Card [type]="'review'" [data]="review"></Card>
+              </div>
+            </div>
         </div>
     </div>
   </div>

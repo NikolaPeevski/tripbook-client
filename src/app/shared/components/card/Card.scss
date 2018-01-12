@@ -107,3 +107,98 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     }
   }
 }
+
+.trip-offer-card-content {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.trip-offer-buttons {
+  display: block;
+  position: relative;
+  margin: -10px;
+  margin-top: 10px;
+  border-top: 1px solid #e8e8e8;
+  padding: 4px 8px;
+}
+
+.trip-offer-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.trip-offer-local {
+  margin: 0px -24px 10px;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 24px;
+  height: 75px;
+}
+
+.to-avatar {
+  background-repeat: no-repeat;
+    height: 55px;
+    width: 55px;
+    border-radius: 99px;
+    border: 3px solid white;
+    box-shadow: 0 1px 2px rgba(8, 8, 8, 0.3);
+    background-position: center;
+    background-size: cover;
+    top: -4px;
+    position: relative;
+    overflow: visible;
+    float: left;
+    margin-right: -2px;
+    left: -12px;
+}
+
+.to-name {
+  font-weight: bold;
+  color: rgb(65, 65, 65);
+  margin-top: 8px;
+  display: inline-block;
+}
+.to-email {
+  font-weight: normal;
+  color: #707070;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+}
+
+.review-card {
+  padding-top: 0;
+  margin-top: 20px;
+
+  .trip-offer-local {
+    margin-top: 0;
+  }
+
+  .material-icons {
+    color: gold;
+    width: 22px;
+  }
+
+  .mat-card-footer {
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 20px;
+  }
+}
+
+.booking-card {
+
+  .mat-card-title {
+    margin: -24px;
+    margin-bottom: 16px;
+    font-size: 20px;
+    border-bottom: 1px solid #e8e8e8;
+    font-weight: bold;
+    padding: 20px;
+  }
+
+  .mat-card-footer {
+    padding: 4px 8px;
+  }
+}

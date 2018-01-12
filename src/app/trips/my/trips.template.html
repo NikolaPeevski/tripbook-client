@@ -1,9 +1,14 @@
 <div id="trips" class="container">
   <div *ngIf="currentTrips">
   <h1>
-    Your current trips
+    Your current trips <button (click)="createTripOffer()" mat-button color="primary">Create a trip</button>
   </h1>
-  <Card *ngFor="let trip of currentTrips" (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
+  
+  <div class="row">
+    <div *ngFor="let trip of currentTrips" class="col col-md-6">
+        <Card (clickEmitter)="goToTripPage($event)" [type]="tripsType[1]" [data]="trip"></Card>
+    </div>
+  </div>
 </div>
 <div *ngIf="pendingTrips">
   <h1>
@@ -21,6 +26,4 @@
     <Card *ngFor="let trip of results" (clickEmitter)="goToPage($event)" (actionEmitter)="handleTrip($event)" [type]="tripsType[0]" [data]="trip" class="col col-md-6"></Card>
   </div>
 </div>
-
-  <button (click)="createTripOffer()" mat-button color="primary">Create a trip</button>
 </div>
