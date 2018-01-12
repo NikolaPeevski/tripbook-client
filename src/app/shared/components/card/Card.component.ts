@@ -32,6 +32,7 @@ export class CardComponent {
   location: any;
 
   reviewer: any;
+  rand = () => Math.floor(Math.random() * (8 + 1)) + 0;
 
   constructor (private _AreaService: AreaService,
                private _TripsService: TripsService,
