@@ -1,4 +1,4 @@
-<div id="trips">
+<div id="trips" class="container">
   <div *ngIf="currentTrips">
   <h1>
     Your current trips
@@ -15,7 +15,11 @@
     <mat-tab label="Completed"></mat-tab>
     <mat-tab label="Cancelled"></mat-tab>
   </mat-tab-group>
-  <Card *ngFor="let trip of results" (clickEmitter)="goToPage($event)" (actionEmitter)="handleTrip($event)" [type]="tripsType[0]" [data]="trip"></Card>
+  <br />
+  <div class="row">
+
+    <Card *ngFor="let trip of results" (clickEmitter)="goToPage($event)" (actionEmitter)="handleTrip($event)" [type]="tripsType[0]" [data]="trip" class="col col-md-6"></Card>
+  </div>
 </div>
 
   <button (click)="createTripOffer()" mat-button color="primary">Create a trip</button>

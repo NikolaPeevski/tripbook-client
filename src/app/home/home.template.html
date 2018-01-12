@@ -1,10 +1,22 @@
 <div id="home" class="container">
   <div class='locals' *ngIf='locals'>
     <h2> Best Rated Locals</h2>
-    <Card *ngFor="let local of locals" [data]="local" [size]="size"  [type]="'local'" (clickEmitter)="goToProfilePage($event)" fxLayoutAlign="center center"></Card>
+
+    <div class="row">
+        <div *ngFor="let local of locals" class="col col-sm-6 col-md-4 col-lg-3">
+        <Card [data]="local" [type]="'local'" (clickEmitter)="goToProfilePage($event)"></Card>
+      </div>
+    </div>
+
   </div>
   <div class='locals' *ngIf='locals'>
     <h2> Popular trips</h2>
-    <Card *ngFor="let trip of trips" [data]="trip" [size]="size"  [type]="'trip-offer'" (clickEmitter)="goToTripPage($event)" fxLayoutAlign="center center"></Card>
+
+    <div class="row">
+      <div *ngFor="let trip of trips" class="col col-sm-6 col-md-4 col-lg-3">
+        <Card [data]="trip" [type]="'trip-offer'" (clickEmitter)="goToTripPage($event)"></Card>
+      </div>
+    </div>
+
   </div>
 </div>

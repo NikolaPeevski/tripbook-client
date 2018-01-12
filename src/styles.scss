@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 // @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
@@ -33,6 +32,9 @@ $trip-book-theme: mat-light-theme($trip-book-primary, $trip-book-accent, $trip-b
 body {
   margin: 0;
 }
+
+
+@import './grid.min.css';
 
 .container {
   padding-right: 15px;
