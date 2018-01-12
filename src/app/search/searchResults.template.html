@@ -4,7 +4,7 @@
     <!-- Locals tab -->
     <div class="locals row" *ngIf="type === 'locals'">
       <!-- Details block -->
-      <div class="detailsBlock">
+      <div class="detailsBlock col-12">
         Discover <b>{{ currentCity | Decode }}</b>, with one of the <b>{{ searchResults.length }} locals</b> who are ready to show you around.
       </div>
       <!-- List the results -->
@@ -14,7 +14,7 @@
     <!-- Trips tab -->
     <div class="trip row" *ngIf="type === 'trips'">
       <!-- Details block -->
-      <div class="detailsBlock">
+      <div class="detailsBlock col-12">
         Discover <b>{{ currentCity | Decode }}</b>, choose one of the <b>{{ searchResults.length }} trip offers</b> that the local people have organized for you!
         <div class="detailsBlockButtons">
           <button *ngIf="user" (click)="createTripRequest()" mat-raised-button color="primary">Request a trip</button>
@@ -31,7 +31,9 @@
       </div>
     </div>
     <div class="trip row" *ngIf="type === 'reviews'">
-      <button *ngIf="user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+      <div class="col-12">
+          <button *ngIf="user" (click)="createReview()" mat-button color="primary">Post a review!</button>
+        </div>
 
       <div *ngFor="let trip of searchResults" class="col col-md-6">
         <Card [type]="tripsType[3]" [data]="trip"></Card>
