@@ -90,7 +90,7 @@ export class UserComponent {
   }
 
   bookATrip(): void {
-    this._ModalWindowService.openModal('book', null, this.user.id);
+    this._ModalWindowService.openModal('book', null, this.local.id);
   }
 
   changeTab($event): void {
